@@ -1,9 +1,16 @@
 # Squares Army
 
-Catch followers by getting close to them and increase your army to marvelous sizes. Fight enemies with smaller armies than yours 
+Catch followers by getting close to them and increase your army to marvelous sizes. Fight enemies with smaller armies than yours
 and watch out for those who have bigger ones!
 
-## Required libraries with links (Windows setup)
+Simple AI based on Seek and Flee steering behaviors. The enemies will not rush you if they are too low. 
+
+### Controls
+- AWSD for movement.
+- P for freezing your army.
+- L for elastic launch.
+
+### Required libraries with links (Windows setup)
 
 Here are my paths (as set in the project configuration). If you want you can set your own paths in project Properties -> Java Build Path -> Libraries
 
