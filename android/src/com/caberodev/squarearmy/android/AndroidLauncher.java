@@ -5,15 +5,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.InputEngine;
 import com.caberodev.squarearmy.SquareArmy;
-import com.caberodev.squarearmy.Text2D;
 import com.caberodev.squarearmy.Vec2;
 
 /**

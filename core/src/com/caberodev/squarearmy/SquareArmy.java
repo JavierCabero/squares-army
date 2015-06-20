@@ -2,6 +2,7 @@ package com.caberodev.squarearmy;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.caberodev.squarearmy.main.Boot;
 
 /**
  * 
@@ -21,11 +22,11 @@ public class SquareArmy extends ApplicationAdapter {
 		LogicEngine.start();
 		InputEngine.start();
 		
-		// Load text
-		accelValuesText2D = new Text2DAccelerometerSensible(DrawEngine.batch, DrawEngine.font, Gdx.graphics.getWidth()>>1 - 1, Gdx.graphics.getHeight()>>1);
+		// Start game
+		new Boot();
 		
 		// Load text
-		//accelValuesText2D = new Text2D(DrawEngine.batch, DrawEngine.font, Gdx.graphics.getWidth()>>1 - 1, Gdx.graphics.getHeight()>>1);
+		accelValuesText2D = new Text2DAccelerometerSensible(DrawEngine.batch, DrawEngine.font, Gdx.graphics.getWidth()>>1 - 1, Gdx.graphics.getHeight()>>1);
 	}
 	
 	@Override
