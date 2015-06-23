@@ -3,6 +3,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.entity.EntityColor;
 import com.caberodev.squarearmy.main.Minion;
 
@@ -21,7 +22,7 @@ public class AppearanceMinionDamaged implements IRenderator {
 	private Random r = new Random();
 
 	public AppearanceMinionDamaged(Minion minion, IRenderator lastAppearance) {
-		this.shapeRenderer = new ShapeRenderer();
+		this.shapeRenderer = DrawEngine.shapeRenderer;
 		this.minion = minion;
 		this.lastAppearance = lastAppearance;
 	}

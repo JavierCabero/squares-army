@@ -25,13 +25,13 @@ import com.caberodev.squarearmy.util.Rectangle;
 public class World implements Thinker, Drawable {
 
 	/* Constants */
-	public static final float CUT_DISTANCE = 1500f; /* To cut some calculus */
+	public static final float CUT_DISTANCE = 768f; /* To cut some calculus */
 	private static final Double WORLD_SIZE = (double) (Boot.SCREEN_WIDTH * 2);
 	private static final int MAX_NUM_HEROES = 5;
 	private final int MINIONS_MAX_X_DISTANCE = Boot.SCREEN_WIDTH;
 	private final int MINIONS_MAX_Y_DISTANCE = Boot.SCREEN_HEIGHT;
-	private final int MAX_NUM_MINIONS = 700;
-	private final int HEROES_RESPAWN_TIME = 100;
+	private final int MAX_NUM_MINIONS = 350;
+	private final int HEROES_RESPAWN_TIME = 128;
 
 	private Random r = new Random();
 

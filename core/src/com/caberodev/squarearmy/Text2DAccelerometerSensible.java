@@ -26,5 +26,4 @@ public class Text2DAccelerometerSensible extends Text2D implements Thinker {
 		if(Gdx.graphics.getWidth() < this.x) this.x = Gdx.graphics.getWidth();
 		if(Gdx.graphics.getHeight() < this.y) this.y = Gdx.graphics.getHeight();
 	}
-
 }

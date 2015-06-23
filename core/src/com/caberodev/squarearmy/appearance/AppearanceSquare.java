@@ -2,6 +2,7 @@ package com.caberodev.squarearmy.appearance;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.entity.EntityColor;
 
 public class AppearanceSquare implements IRenderator {
@@ -11,7 +12,7 @@ public class AppearanceSquare implements IRenderator {
 	
 	public AppearanceSquare(IRenderable entity) {
 		this.entity = entity;
-		this.shapeRenderer = new ShapeRenderer();
+		this.shapeRenderer = DrawEngine.shapeRenderer;
 	}
 
 	public void render() {
@@ -23,7 +24,7 @@ public class AppearanceSquare implements IRenderator {
 
 		shapeRenderer.begin(ShapeType.Filled);
 		shapeRenderer.setColor(color.red, color.green, color.blue, 1);
-		shapeRenderer.rect(x, y, size, size);
+		shapeRenderer.rect(x, y, size, size);	
 		shapeRenderer.end();
 	}
 

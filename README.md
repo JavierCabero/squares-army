@@ -23,3 +23,7 @@ Use this for controlling the captain square.
 ### License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+### Additional comments
+
+Square Army was initially developed under the name **Game Core**. It was planned to be a standalone development for testing myself against the neverending ideas that you come alone when making games. The project has evolved to a new level. Before, there was only the desktop version. Now you can play it on your phone and any web browser.

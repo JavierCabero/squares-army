@@ -3,11 +3,12 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.entity.EntityColor;
 import com.caberodev.squarearmy.main.Hero;
 
 
-public class AppearanceHeroDamaged implements IRenderator{
+public class AppearanceHeroDamaged implements IRenderator {
 
 	/* Constants */
 	public static final int APPEARANCE_TIME = 15;
@@ -21,7 +22,7 @@ public class AppearanceHeroDamaged implements IRenderator{
 	private Random r = new Random();
 
 	public AppearanceHeroDamaged(Hero hero, IRenderator lastAppearance) {
-		this.shapeRenderer = new ShapeRenderer();
+		this.shapeRenderer = DrawEngine.shapeRenderer;
 		this.hero = hero;
 		this.lastAppearance = lastAppearance;
 	}

@@ -106,27 +106,13 @@ public class AndroidLauncher extends AndroidApplication implements SensorEventLi
             if(Math.abs(y) < epsilon) y = 0;
             
             // Update movement direction
-            InputEngine.dir = new Vec2(x, y);
+            InputEngine.dir = new Vec2(y, -x);
             
             // Save marks
             mAccel = new float[]{x, y};
-            
-            // Draw accelerometer values
-            formatAccelText();
-    		
-            //Log.d("Accelerometer Information Recieved", String.valueOf(message_count++));
         }  
     }
     
-	private void formatAccelText() {
-		StringBuilder aValues = new StringBuilder("(");
-		for(float value : mAccel)
-			aValues.append(value + ", ");
-		aValues.replace(aValues.length()-2, aValues.length(), ")");
-		if(SquareArmy.accelValuesText2D != null)
-			SquareArmy.accelValuesText2D.setText("Accel: " + aValues.toString());
-	}
-	
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Nothing

@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import com.caberodev.squarearmy.InputEngine;
+import com.caberodev.squarearmy.Vec2;
 import com.caberodev.squarearmy.appearance.AppearanceHeroDamaged;
 import com.caberodev.squarearmy.appearance.AppearanceSquare;
 import com.caberodev.squarearmy.appearance.IRenderable;
@@ -58,6 +59,8 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	private final float sightDistance = 300f;
 	private int behavior_delay = BEHAVIOR_DELAY;
 
+	public static Vec2 player = new Vec2(0, 0);
+	
 	/* For AI Hero */
 	private IBehavior behavior;
 
@@ -126,20 +129,28 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 
 		/* Check if enemy minions are too close so we call minions to defend */
 		lookForNearbyEnemyMinions();
-
+		
+		
 		if (isPlayer) {
 			attack();
 
-			/* Read keyboard */
+			// Read keyboard 
 			readInput();
 		} else {
 			if (r.nextInt() % AILevel == 0)
 				behavior.update();
 		}
 
-		/* Apply movement */
+		// Apply movement 
 		super.update();
 
+		// Camera follows
+		if(isPlayer) {
+			player.x = x;
+			player.y = y;
+		}
+		
+		// Reduce movement (friction)
 		movementReduction();
 	}
 
@@ -211,8 +222,8 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	
 	private void readInput() {
 
-		dx =  InputEngine.dir.y * move_speed;
-		dy = -InputEngine.dir.x * move_speed;
+		dx =  InputEngine.dir.x * move_speed;
+		dy =  InputEngine.dir.y * move_speed;
 
 		world.requestMinionsFor(this);
 		numMinions = minions.size();
