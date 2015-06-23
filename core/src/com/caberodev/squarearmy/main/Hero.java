@@ -106,10 +106,7 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	}
 
 	public void render() {
-
-		if (world.getScreenRectangle().contains((int) x, (int) y))
-			getAppearance().render();
-
+		appearance.render();
 	}
 
 	public IRenderator getAppearance() {

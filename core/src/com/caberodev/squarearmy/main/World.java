@@ -3,63 +3,67 @@ package com.caberodev.squarearmy.main;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
+import com.badlogic.gdx.Gdx;
 import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.Drawable;
 import com.caberodev.squarearmy.LogicEngine;
 import com.caberodev.squarearmy.Thinker;
 import com.caberodev.squarearmy.behavior.BehaviorMinionFollowHero;
 import com.caberodev.squarearmy.entity.EntityColor;
-import com.caberodev.squarearmy.util.Rectangle;
+import com.caberodev.squarearmy.util.RandomData;
 
-/*
- * World
+/**
+ * 
+ * @author Javier Cabero Guerra <br>
+ * 
+ * Copyright 2015 (c) All Rights Reserved. <br><br>
+ *        
+ *        
+ * World<br>
  * 
  * 	This is one of the most important classes, containing almost ALL the
  * logic in this game.
  * 
- * The information about minions and heroes in the world is here.
+ * The information about minions and heroes is stored here.
  */
 public class World implements Thinker, Drawable {
 
-	/* Constants */
-	public static final float CUT_DISTANCE = 768f; /* To cut some calculus */
-	private static final Double WORLD_SIZE = (double) (Boot.SCREEN_WIDTH * 2);
-	private static final int MAX_NUM_HEROES = 5;
-	private final int MINIONS_MAX_X_DISTANCE = Boot.SCREEN_WIDTH;
-	private final int MINIONS_MAX_Y_DISTANCE = Boot.SCREEN_HEIGHT;
-	private final int MAX_NUM_MINIONS = 350;
-	private final int HEROES_RESPAWN_TIME = 128;
-
-	private Random r = new Random();
-
-	/* Data structures */
-	private Set<Minion> minions = new HashSet<Minion>();
-	private Set<Minion> neutralMinions = new HashSet<Minion>();
-	private List<Hero> heroes = new ArrayList<Hero>();
-	private int numMinions = 0;
-	private Set<Minion> deadMinions = new HashSet<Minion>();
-	private Set<Hero> deadHeroes = new HashSet<Hero>();
-	private float camera_speed = 16;
-	private Hero player;
-	private int numHeroes;
-	private EntityColor[] colors = EntityColor.values();
-	private final Double alpha = Math.asin(Boot.SCREEN_HEIGHT
-			/ Math.sqrt((Boot.SCREEN_WIDTH * Boot.SCREEN_WIDTH) + (Boot.SCREEN_HEIGHT * Boot.SCREEN_HEIGHT)));
-	private float offsetX = 0;
-	private float offsetY = 0;
-	private int heroesRespawnTime = HEROES_RESPAWN_TIME + r.nextInt(HEROES_RESPAWN_TIME);
-	// TODO: private Boot boot;
+	// Constants
+	public static final float CUT_DISTANCE   = 768f; /* To cut some calculus */
+	private static final Double WORLD_SIZE   = (double) (Gdx.graphics.getWidth() * 2);
+	private static final int MAX_NUM_HEROES  = 5;
+	private final int MINIONS_MAX_X_DISTANCE = Gdx.graphics.getWidth();
+	private final int MINIONS_MAX_Y_DISTANCE = Gdx.graphics.getHeight();
+	private final int MAX_NUM_MINIONS 	     = 350;
+	private final int HEROES_RESPAWN_TIME    = 128;
+	private final int INITIAL_MINIONS 	     = 50;
 	
-	public World(Boot boot, int numNeutralMinions) {
+	// Heroes
+	private List<Hero>          heroes = new ArrayList<Hero>();
+	private Set<Hero>       deadHeroes = new HashSet<Hero>();
 
-		// this.boot = boot;
-		
-		/* Create neutral Minions */
-		for (int i = 1; i < numNeutralMinions; i++) {
-			Minion m = new Minion(this, r.nextInt(MINIONS_MAX_X_DISTANCE), r.nextInt(MINIONS_MAX_Y_DISTANCE));
+	// Minions
+	private int numMinions = 0;
+	private Set<Minion>        minions = new HashSet<Minion>();
+	private Set<Minion> neutralMinions = new HashSet<Minion>();
+	private Set<Minion>    deadMinions = new HashSet<Minion>();
+	
+	private Hero player;
+	private int numHeroes = 0;
+	private int nextHeroSpawn = HEROES_RESPAWN_TIME + RandomData.nextInt(HEROES_RESPAWN_TIME);
+	
+	private EntityColor[] colors = EntityColor.values();
+//	private final Double alpha   = Math.asin(Gdx.graphics.getHeight() / Math.sqrt((Gdx.graphics.getWidth()  * Gdx.graphics.getWidth()) + 
+//			                		       									      (Gdx.graphics.getHeight() * Gdx.graphics.getHeight())));
+
+	
+	public World() {
+
+		// Create neutral Minions 
+		for (int i = 1; i < INITIAL_MINIONS; i++) {
+			Minion m = new Minion(this, RandomData.nextInt(MINIONS_MAX_X_DISTANCE), RandomData.nextInt(MINIONS_MAX_Y_DISTANCE));
 			minions.add(m);
 			/* Redundant list to optimize computation */
 			neutralMinions.add(m);
@@ -67,25 +71,25 @@ public class World implements Thinker, Drawable {
 		}
 
 		/* Create Hero */
-		player = new Hero(Boot.SCREEN_WIDTH / 2, Boot.SCREEN_HEIGHT / 2);
+		player = new Hero(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 		player.setWorld(this);
 		player.setPlayer(true);
 
 		// //Create an red
-		// Hero redEnemy = new Hero((Boot.SCREEN_WIDTH * 4) / 5,
-		// Boot.SCREEN_HEIGHT / 2);
+		// Hero redEnemy = new Hero((Gdx.graphics.getWidth() * 4) / 5,
+		// Gdx.graphics.getHeight() / 2);
 		// redEnemy.setWorld(this);
 		// redEnemy.setColor(EntityColor.RED);
 		//
 		// //Create an green
-		// Hero greenEnemy = new Hero((Boot.SCREEN_WIDTH * 2) / 5,
-		// Boot.SCREEN_HEIGHT / 2);
+		// Hero greenEnemy = new Hero((Gdx.graphics.getWidth() * 2) / 5,
+		// Gdx.graphics.getHeight() / 2);
 		// greenEnemy.setWorld(this);
 		// greenEnemy.setColor(EntityColor.GREEN);
 		//
 		// //Create orange
-		// Hero cianEnemy = new Hero((Boot.SCREEN_WIDTH * 3) / 6,
-		// Boot.SCREEN_HEIGHT / 2);
+		// Hero cianEnemy = new Hero((Gdx.graphics.getWidth() * 3) / 6,
+		// Gdx.graphics.getHeight() / 2);
 		// cianEnemy.setWorld(this);
 		// cianEnemy.setColor(EntityColor.CIAN);
 
@@ -107,8 +111,6 @@ public class World implements Thinker, Drawable {
 			h.update();
 		}
 		
-		screenAroundPlayer();
-		
 		/* Update minions */
 		for (Minion m : minions) {
 			m.update();
@@ -116,21 +118,21 @@ public class World implements Thinker, Drawable {
 
 		if (numMinions < MAX_NUM_MINIONS) {
 			int x, y;
-			int i = r.nextInt(MINIONS_MAX_X_DISTANCE);
-			int j = r.nextInt(MINIONS_MAX_Y_DISTANCE);
+			int i = RandomData.nextInt(MINIONS_MAX_X_DISTANCE);
+			int j = RandomData.nextInt(MINIONS_MAX_Y_DISTANCE);
 			if (i % 2 == 0) {
-				x = (int) player.getX() + Boot.SCREEN_WIDTH / 2 + i;
+				x = (int) player.getX() + Gdx.graphics.getWidth() / 2 + i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Boot.SCREEN_HEIGHT / 2 + j;
+					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Boot.SCREEN_HEIGHT / 2 - j;
+					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
 				}
 			} else {
-				x = (int) player.getX() - Boot.SCREEN_WIDTH / 2 - i;
+				x = (int) player.getX() - Gdx.graphics.getWidth() / 2 - i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Boot.SCREEN_HEIGHT / 2 + j;
+					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Boot.SCREEN_HEIGHT / 2 - j;
+					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
 				}
 			}
 			Minion m = new Minion(this, x, y);
@@ -151,23 +153,23 @@ public class World implements Thinker, Drawable {
 			}
 		}
 
-		if (numHeroes < MAX_NUM_HEROES && heroesRespawnTime <= 0) {
+		if (numHeroes < MAX_NUM_HEROES && nextHeroSpawn <= 0) {
 			int x, y;
-			int i = r.nextInt(MINIONS_MAX_X_DISTANCE);
-			int j = r.nextInt(MINIONS_MAX_Y_DISTANCE);
+			int i = RandomData.nextInt(MINIONS_MAX_X_DISTANCE);
+			int j = RandomData.nextInt(MINIONS_MAX_Y_DISTANCE);
 			if (i % 2 == 0) {
-				x = (int) player.getX() + Boot.SCREEN_WIDTH / 2 + i;
+				x = (int) player.getX() + Gdx.graphics.getWidth() / 2 + i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Boot.SCREEN_HEIGHT / 2 + j;
+					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Boot.SCREEN_HEIGHT / 2 - j;
+					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
 				}
 			} else {
-				x = (int) player.getX() - Boot.SCREEN_WIDTH / 2 - i;
+				x = (int) player.getX() - Gdx.graphics.getWidth() / 2 - i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Boot.SCREEN_HEIGHT / 2 + j;
+					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Boot.SCREEN_HEIGHT / 2 - j;
+					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
 				}
 			}
 			Hero h = new Hero(x, y);
@@ -175,7 +177,7 @@ public class World implements Thinker, Drawable {
 			h.setWorld(this);
 
 			boolean colorSelected = false;
-			int colorIndex = r.nextInt(colors.length);
+			int colorIndex = RandomData.nextInt(colors.length);
 			EntityColor color = EntityColor.GRAY;
 			Set<EntityColor> colorsUsed = getColorsUsed();
 			while (!colorSelected) {
@@ -188,11 +190,11 @@ public class World implements Thinker, Drawable {
 			}
 			h.setColor(color);
 
-			numHeroes++;
+			numHeroes++; 
 			
-			heroesRespawnTime = HEROES_RESPAWN_TIME + r.nextInt(HEROES_RESPAWN_TIME);
+			nextHeroSpawn = HEROES_RESPAWN_TIME + RandomData.nextInt(HEROES_RESPAWN_TIME);
 		} else {
-			heroesRespawnTime--;
+			nextHeroSpawn--;
 		}
 
 		for (Hero h : heroes) {
@@ -245,139 +247,139 @@ public class World implements Thinker, Drawable {
 
 		// TODO: renderArmiesLength();
 		// TODO: renderHeroesHealth();
-		renderEnemyLocatorArrow();
+//		renderEnemyLocatorArrow();
 	}
 
-	@SuppressWarnings("unused")
-	private void renderEnemyLocatorArrow() {
-
-		for (Hero h : heroes) {
-
-			if (!getScreenRectangle().contains((int) h.getX(), (int) h.getY())) {
-				/* Calculate arrow place */
-				float x = ((float) Boot.SCREEN_WIDTH / 2) - offsetX;
-				float y = ((float) Boot.SCREEN_HEIGHT / 2) - offsetY;
-				float x1 = 10, y1 = 10, x2 = 100, y2 = 10, x3 = 10, y3 = 100;
-
-				float diffX = h.getX() - x;
-				float diffY = h.getY() - y;
-
-				if (diffX > 0) {
-					if (diffY > 0) {
-						/* Top right */
-						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) < alpha) {
-							/* key point */
-							y1 = Boot.SCREEN_HEIGHT / 2 - offsetY + diffY;
-							x1 = Boot.SCREEN_WIDTH - 10 - offsetX;
-
-							x2 = x1 - 10;
-							y2 = y1 + 10;
-
-							x3 = x2;
-							y3 = y1 - 10;
-
-						} else {
-							/* key point */
-							y1 = Boot.SCREEN_HEIGHT - offsetY - 10;
-							x1 = Boot.SCREEN_WIDTH / 2 - offsetX + diffX;
-
-							x2 = x1 - 10;
-							y2 = y1 - 10;
-
-							x3 = x1 + 10;
-							y3 = y2;
-						}
-					} else {
-						/* Bottom right */
-
-						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) > -alpha + (1 / 2)) {
-							/* key point */
-							y1 = Boot.SCREEN_HEIGHT / 2 - offsetY + diffY;
-							x1 = Boot.SCREEN_WIDTH - 10 - offsetX;
-
-							x2 = x1 - 10;
-							y2 = y1 + 10;
-
-							x3 = x2;
-							y3 = y1 - 10;
-
-						} else {
-							/* key point */
-							y1 = -offsetY + 10;
-							x1 = Boot.SCREEN_WIDTH / 2 - offsetX + diffX;
-							x2 = x1 - 10;
-							y2 = y1 + 10;
-
-							x3 = x1 + 10;
-							y3 = y2;
-						}
-					}
-				} else {
-					if (diffY > 0) {
-						/* Top left */
-						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) < alpha + (1 / 2)) {
-							/* key point */
-							y1 = Boot.SCREEN_HEIGHT / 2 - offsetY + diffY;
-							x1 = 10 - offsetX;
-
-							x2 = x1 + 10;
-							y2 = y1 + 10;
-
-							x3 = x2;
-							y3 = y1 - 10;
-
-						} else {
-							/* key point */
-							y1 = Boot.SCREEN_HEIGHT - offsetY - 10;
-							x1 = Boot.SCREEN_WIDTH / 2 - offsetX + diffX;
-
-							x2 = x1 - 10;
-							y2 = y1 - 10;
-
-							x3 = x1 + 10;
-							y3 = y2;
-						}
-					} else {
-						/* Bottom Left */
-
-						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) > -alpha + (1 / 2)) {
-							/* key point */
-							y1 = Boot.SCREEN_HEIGHT / 2 - offsetY + diffY;
-							x1 = 10 - offsetX;
-
-							x2 = x1 + 10;
-							y2 = y1 + 10;
-
-							x3 = x2;
-							y3 = y1 - 10;
-
-						} else {
-							/* key point */
-							y1 = -offsetY + 10;
-							x1 = Boot.SCREEN_WIDTH / 2 - offsetX + diffX;
-							x2 = x1 - 10;
-							y2 = y1 + 10;
-
-							x3 = x1 + 10;
-							y3 = y2;
-						}
-					}
-				}
-
-				/* TODO: Render arrow 
-				EntityColor color = h.getColor();
-				glColor3f(color.red, color.green, color.blue);
-
-				glBegin(GL_TRIANGLES);
-				glVertex2f(x1, y1);
-				glVertex2f(x2, y2);
-				glVertex2f(x3, y3);
-				glEnd();
-				*/
-			}
-		}
-
-	}
+//	@SuppressWarnings("unused")
+//	private void renderEnemyLocatorArrow() {
+//
+//		for (Hero h : heroes) {
+//
+//			if (!getScreenRectangle().contains((int) h.getX(), (int) h.getY())) {
+//				/* Calculate arrow place */
+//				float x = ((float) Gdx.graphics.getWidth() / 2) - offsetX;
+//				float y = ((float) Gdx.graphics.getHeight() / 2) - offsetY;
+//				float x1 = 10, y1 = 10, x2 = 100, y2 = 10, x3 = 10, y3 = 100;
+//
+//				float diffX = h.getX() - x;
+//				float diffY = h.getY() - y;
+//
+//				if (diffX > 0) {
+//					if (diffY > 0) {
+//						/* Top right */
+//						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) < alpha) {
+//							/* key point */
+//							y1 = Gdx.graphics.getHeight() / 2 - offsetY + diffY;
+//							x1 = Gdx.graphics.getWidth() - 10 - offsetX;
+//
+//							x2 = x1 - 10;
+//							y2 = y1 + 10;
+//
+//							x3 = x2;
+//							y3 = y1 - 10;
+//
+//						} else {
+//							/* key point */
+//							y1 = Gdx.graphics.getHeight() - offsetY - 10;
+//							x1 = Gdx.graphics.getWidth() / 2 - offsetX + diffX;
+//
+//							x2 = x1 - 10;
+//							y2 = y1 - 10;
+//
+//							x3 = x1 + 10;
+//							y3 = y2;
+//						}
+//					} else {
+//						/* Bottom right */
+//
+//						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) > -alpha + (1 / 2)) {
+//							/* key point */
+//							y1 = Gdx.graphics.getHeight() / 2 - offsetY + diffY;
+//							x1 = Gdx.graphics.getWidth() - 10 - offsetX;
+//
+//							x2 = x1 - 10;
+//							y2 = y1 + 10;
+//
+//							x3 = x2;
+//							y3 = y1 - 10;
+//
+//						} else {
+//							/* key point */
+//							y1 = -offsetY + 10;
+//							x1 = Gdx.graphics.getWidth() / 2 - offsetX + diffX;
+//							x2 = x1 - 10;
+//							y2 = y1 + 10;
+//
+//							x3 = x1 + 10;
+//							y3 = y2;
+//						}
+//					}
+//				} else {
+//					if (diffY > 0) {
+//						/* Top left */
+//						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) < alpha + (1 / 2)) {
+//							/* key point */
+//							y1 = Gdx.graphics.getHeight() / 2 - offsetY + diffY;
+//							x1 = 10 - offsetX;
+//
+//							x2 = x1 + 10;
+//							y2 = y1 + 10;
+//
+//							x3 = x2;
+//							y3 = y1 - 10;
+//
+//						} else {
+//							/* key point */
+//							y1 = Gdx.graphics.getHeight() - offsetY - 10;
+//							x1 = Gdx.graphics.getWidth() / 2 - offsetX + diffX;
+//
+//							x2 = x1 - 10;
+//							y2 = y1 - 10;
+//
+//							x3 = x1 + 10;
+//							y3 = y2;
+//						}
+//					} else {
+//						/* Bottom Left */
+//
+//						if (Math.asin(diffY / Math.sqrt((diffX * diffX) + (diffY * diffY))) > -alpha + (1 / 2)) {
+//							/* key point */
+//							y1 = Gdx.graphics.getHeight() / 2 - offsetY + diffY;
+//							x1 = 10 - offsetX;
+//
+//							x2 = x1 + 10;
+//							y2 = y1 + 10;
+//
+//							x3 = x2;
+//							y3 = y1 - 10;
+//
+//						} else {
+//							/* key point */
+//							y1 = -offsetY + 10;
+//							x1 = Gdx.graphics.getWidth() / 2 - offsetX + diffX;
+//							x2 = x1 - 10;
+//							y2 = y1 + 10;
+//
+//							x3 = x1 + 10;
+//							y3 = y2;
+//						}
+//					}
+//				}
+//
+//				/* TODO: Render arrow 
+//				EntityColor color = h.getColor();
+//				glColor3f(color.red, color.green, color.blue);
+//
+//				glBegin(GL_TRIANGLES);
+//				glVertex2f(x1, y1);
+//				glVertex2f(x2, y2);
+//				glVertex2f(x3, y3);
+//				glEnd();
+//				*/
+//			}
+//		}
+//
+//	}
 
 	/*
 	private void renderHeroesHealth() {
@@ -392,11 +394,11 @@ public class World implements Thinker, Drawable {
 			glColor3f(color.red, color.green, color.blue);
 
 			glBegin(GL_QUADS);
-			glVertex2f(-offsetX + Boot.SCREEN_WIDTH - 15, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15); // Upper-left
-			glVertex2f(-offsetX + Boot.SCREEN_WIDTH - 15 - heroHealth, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15); // Upper-right
-			glVertex2f(-offsetX + Boot.SCREEN_WIDTH - 15 - heroHealth, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15
+			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-left
+			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15 - heroHealth, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-right
+			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15 - heroHealth, -offsetY + Gdx.graphics.getHeight() - numHero * 15
 					- 10); // Bottom-right
-			glVertex2f(-offsetX + Boot.SCREEN_WIDTH - 15, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15 - 10); // Botton-left
+			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15 - 10); // Botton-left
 			glEnd();
 			numHero++;
 		}
@@ -414,10 +416,10 @@ public class World implements Thinker, Drawable {
 			glColor3f(color.red, color.green, color.blue);
 
 			glBegin(GL_QUADS);
-			glVertex2f(-offsetX + 15, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15); // Upper-left
-			glVertex2f(-offsetX + 15 + numMinions, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15); // Upper-right
-			glVertex2f(-offsetX + 15 + numMinions, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15 - 10); // Bottom-right
-			glVertex2f(-offsetX + 15, -offsetY + Boot.SCREEN_HEIGHT - numHero * 15 - 10); // Botton-left
+			glVertex2f(-offsetX + 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-left
+			glVertex2f(-offsetX + 15 + numMinions, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-right
+			glVertex2f(-offsetX + 15 + numMinions, -offsetY + Gdx.graphics.getHeight() - numHero * 15 - 10); // Bottom-right
+			glVertex2f(-offsetX + 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15 - 10); // Botton-left
 			glEnd();
 			numHero++;
 		}
@@ -488,26 +490,6 @@ public class World implements Thinker, Drawable {
 		neutralMinions.add(m);
 	}
 
-	public void screenAroundPlayer() {
-		/* x axis */
-		float x = heroes.get(0).getX() + offsetX;
-		float dx = Boot.SCREEN_WIDTH / 2 - x;
-
-		dx /= camera_speed;
-
-		// TODO: glTranslatef(dx, 0, 0);
-		offsetX += dx;
-
-		/* y axis */
-		float y = heroes.get(0).getY() + offsetY;
-		float dy = Boot.SCREEN_HEIGHT / 2 - y;
-
-		dy /= camera_speed;
-		// TODO: glTranslatef(0, dy, 0);
-		offsetY += dy;
-
-	}
-
 	public Set<Minion> getMinions() {
 		return minions;
 	}
@@ -532,10 +514,6 @@ public class World implements Thinker, Drawable {
 
 	public void addDeadHero(Hero h) {
 		deadHeroes.add(h);
-	}
-
-	public Rectangle getScreenRectangle() {
-		return new Rectangle((int) -offsetX, (int) -offsetY, Boot.SCREEN_WIDTH, Boot.SCREEN_HEIGHT);
 	}
 
 	public Set<Minion> getNeutralMinions() {

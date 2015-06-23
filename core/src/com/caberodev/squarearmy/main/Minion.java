@@ -61,8 +61,7 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 	}
 
 	public void render() {
-		if (world.getScreenRectangle().contains((int) x, (int) y))
-			getAppearance().render();
+		appearance.render();
 	}
 
 	public void update() {

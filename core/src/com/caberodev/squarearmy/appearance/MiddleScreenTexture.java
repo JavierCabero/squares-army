@@ -1,8 +1,8 @@
 package com.caberodev.squarearmy.appearance;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.caberodev.squarearmy.entity.EntityColor;
-import com.caberodev.squarearmy.main.Boot;
 
 public class MiddleScreenTexture implements IRenderable {
 
@@ -12,8 +12,8 @@ public class MiddleScreenTexture implements IRenderable {
 	public MiddleScreenTexture(Texture texture) {
 		this.texture = texture;
 
-		x = Boot.SCREEN_WIDTH / 2 - texture.getWidth() / 2;
-		y = Boot.SCREEN_HEIGHT / 2 - texture.getHeight() / 2;
+		x = Gdx.graphics.getWidth() / 2 - texture.getWidth() / 2;
+		y = Gdx.graphics.getHeight() / 2 - texture.getHeight() / 2;
 	}
 
 	public float getX() {

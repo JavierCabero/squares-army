@@ -1,7 +1,7 @@
 package com.caberodev.squarearmy;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.caberodev.squarearmy.main.Boot;
+import com.caberodev.squarearmy.main.World;
 
 /**
  * 
@@ -11,7 +11,7 @@ import com.caberodev.squarearmy.main.Boot;
  *                                          
  */
 public class SquareArmy extends ApplicationAdapter {
-
+	
 	@Override
 	public void create() {
 		// Start Engines
@@ -20,7 +20,7 @@ public class SquareArmy extends ApplicationAdapter {
 		InputEngine.start();
 		
 		// Start game
-		new Boot();
+		new World();
 	}
 	
 	@Override
