@@ -7,7 +7,7 @@ import com.caberodev.squarearmy.appearance.IRenderator;
 import com.caberodev.squarearmy.behavior.BehaviorMinionNoHero;
 import com.caberodev.squarearmy.behavior.IBehavior;
 import com.caberodev.squarearmy.entity.AbstractMoveableEntity;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.health.BasicHealth;
 import com.caberodev.squarearmy.health.IHealth;
 
@@ -29,7 +29,7 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 
 	/* Variables */
 	private float size = 4;
-	private EntityColor color;
+	private Color color;
 	private IHealth health;
 	private IBehavior behavior;
 	private IRenderator appearance;
@@ -108,11 +108,11 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 		this.behavior = behavior;
 	}
 
-	public EntityColor getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(EntityColor color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 

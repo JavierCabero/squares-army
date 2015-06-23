@@ -11,7 +11,7 @@ import com.caberodev.squarearmy.Drawable;
 import com.caberodev.squarearmy.LogicEngine;
 import com.caberodev.squarearmy.Thinker;
 import com.caberodev.squarearmy.behavior.BehaviorMinionFollowHero;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.util.RandomData;
 
 /**
@@ -54,11 +54,10 @@ public class World implements Thinker, Drawable {
 	private int numHeroes = 0;
 	private int nextHeroSpawn = HEROES_RESPAWN_TIME + RandomData.nextInt(HEROES_RESPAWN_TIME);
 	
-	private EntityColor[] colors = EntityColor.values();
+	private Color[] colors = new Color[]{Color.BLUE, Color.RED, Color.CYAN, Color.GRAY, Color.GREEN, Color.WHITE, Color.YELLOW};
 //	private final Double alpha   = Math.asin(Gdx.graphics.getHeight() / Math.sqrt((Gdx.graphics.getWidth()  * Gdx.graphics.getWidth()) + 
 //			                		       									      (Gdx.graphics.getHeight() * Gdx.graphics.getHeight())));
 
-	
 	public World() {
 
 		// Create neutral Minions 
@@ -178,10 +177,10 @@ public class World implements Thinker, Drawable {
 
 			boolean colorSelected = false;
 			int colorIndex = RandomData.nextInt(colors.length);
-			EntityColor color = EntityColor.GRAY;
-			Set<EntityColor> colorsUsed = getColorsUsed();
+			Color color = Color.GRAY;
+			Set<Color> colorsUsed = getColorsUsed();
 			while (!colorSelected) {
-				if (!colors[colorIndex].equals(EntityColor.GRAY) && !colors[colorIndex].equals(EntityColor.WHITE)
+				if (!colors[colorIndex].equals(Color.GRAY) && !colors[colorIndex].equals(Color.WHITE)
 						&& !colorsUsed.contains(colors[colorIndex])) {
 					color = colors[colorIndex];
 					colorSelected = true;
@@ -211,8 +210,8 @@ public class World implements Thinker, Drawable {
 		removeDeadHeroes();
 	}
 
-	private Set<EntityColor> getColorsUsed() {
-		Set<EntityColor> colorsUsed = new HashSet<EntityColor>();
+	private Set<Color> getColorsUsed() {
+		Set<Color> colorsUsed = new HashSet<Color>();
 
 		for (Hero h : heroes) {
 			colorsUsed.add(h.getColor());

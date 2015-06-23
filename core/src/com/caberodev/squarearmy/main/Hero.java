@@ -20,7 +20,7 @@ import com.caberodev.squarearmy.behavior.BehaviorMinionNoHero;
 import com.caberodev.squarearmy.behavior.IBehavior;
 import com.caberodev.squarearmy.entity.AbstractMoveableEntity;
 import com.caberodev.squarearmy.entity.Entity;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.health.BasicHealth;
 import com.caberodev.squarearmy.health.IHealth;
 
@@ -47,7 +47,7 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	/* Variables */
 	private float size = 8;
 	private float movement_speed = 4;
-	private EntityColor color;
+	private Color color;
 	private float callDistance;
 	private World world;
 	private boolean isPlayer;
@@ -79,7 +79,7 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 		/* Default call distance: 35 */
 		callDistance = 35;
 		/* Default color: Blue */
-		color = EntityColor.BLUE;
+		color = Color.BLUE;
 
 		/* Default behavior: Collect minions */
 		behavior = new BehaviorHeroCollectMinions(this);
@@ -297,11 +297,11 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 		}
 	}
 
-	public EntityColor getColor() {
+	public Color getColor() {
 		return color;
 	}
 
-	public void setColor(EntityColor color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 

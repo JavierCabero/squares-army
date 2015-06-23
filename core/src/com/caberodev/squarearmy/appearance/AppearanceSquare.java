@@ -1,29 +1,27 @@
 package com.caberodev.squarearmy.appearance;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.caberodev.squarearmy.DrawEngine;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 
-public class AppearanceSquare implements IRenderator {
+public class AppearanceSquare extends Shape implements IRenderator {
 
 	private IRenderable entity;
-	private ShapeRenderer shapeRenderer;
+	
+	private float x, y;
+	private float size;
 	
 	public AppearanceSquare(IRenderable entity) {
 		this.entity = entity;
-		this.shapeRenderer = DrawEngine.shapeRenderer;
 	}
 
 	public void render() {
-		/* Get parameters */
-		EntityColor color = entity.getColor();
-		float x = entity.getX();
-		float y = entity.getY();
-		float size = entity.getSize();
+		Color color = entity.getColor();
+		x = entity.getX();
+		y = entity.getY();
+		size = entity.getSize();
 
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(color.red, color.green, color.blue, 1);
+		shapeRenderer.setColor(color.r, color.g, color.b, 1);
 		shapeRenderer.rect(x, y, size, size);	
 		shapeRenderer.end();
 	}

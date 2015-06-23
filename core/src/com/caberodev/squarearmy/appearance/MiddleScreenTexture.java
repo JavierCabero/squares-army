@@ -2,7 +2,7 @@ package com.caberodev.squarearmy.appearance;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 
 public class MiddleScreenTexture implements IRenderable {
 
@@ -49,8 +49,8 @@ public class MiddleScreenTexture implements IRenderable {
 	public void update() {
 	}
 
-	public EntityColor getColor() {
-		return EntityColor.WHITE;
+	public Color getColor() {
+		return Color.WHITE;
 	}
 
 	public float getSize() {

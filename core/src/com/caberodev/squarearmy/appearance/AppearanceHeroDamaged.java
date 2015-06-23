@@ -4,7 +4,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.DrawEngine;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.main.Hero;
 
 
@@ -12,7 +12,7 @@ public class AppearanceHeroDamaged implements IRenderator {
 
 	/* Constants */
 	public static final int APPEARANCE_TIME = 15;
-	private static final EntityColor damagedColor = EntityColor.WHITE;
+	private static final Color damagedColor = Color.WHITE;
 
 	/* Variables */
 	private ShapeRenderer shapeRenderer;
@@ -33,7 +33,7 @@ public class AppearanceHeroDamaged implements IRenderator {
 		float y = hero.getY();
 		float size = hero.getSize();
 
-		EntityColor color;
+		Color color;
 		if (remainingTime % 2 == 0) {
 			color = hero.getColor();
 		} else {
@@ -44,7 +44,7 @@ public class AppearanceHeroDamaged implements IRenderator {
 		int yOffset = r.nextInt(4) - 2;
 		
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(color.red, color.green, color.blue, 1);
+		shapeRenderer.setColor(color.r, color.g, color.b, 1);
 		shapeRenderer.rect(x + xOffset, y + yOffset, size, size);
 		shapeRenderer.end();
 

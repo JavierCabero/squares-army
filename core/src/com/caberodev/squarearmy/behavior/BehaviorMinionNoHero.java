@@ -2,7 +2,7 @@ package com.caberodev.squarearmy.behavior;
 
 import java.util.Random;
 
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.main.Minion;
 
 /* Random moves at random intervals */
@@ -26,7 +26,7 @@ public class BehaviorMinionNoHero implements IBehavior {
 	public BehaviorMinionNoHero(Minion m) {
 		this.m = m;
 		/* This behavior colors a neutral minion (gray) */
-		m.setColor(EntityColor.GRAY);
+		m.setColor(Color.GRAY);
 
 		r = new Random();
 		MAX_DELAY = 200 + r.nextInt(MAX_MINION_DELAY);

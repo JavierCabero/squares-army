@@ -4,14 +4,14 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.DrawEngine;
-import com.caberodev.squarearmy.entity.EntityColor;
+import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.main.Minion;
 
 public class AppearanceMinionDamaged implements IRenderator {
 
 	/* Constants */
 	private static final int APPEARANCE_TIME = 15;
-	private static final EntityColor damagedColor = EntityColor.WHITE;
+	private static final Color damagedColor = Color.WHITE;
 
 	
 	/* Variables */
@@ -33,7 +33,7 @@ public class AppearanceMinionDamaged implements IRenderator {
 		float y = minion.getY();
 		float size = minion.getSize();
 
-		EntityColor color;
+		Color color;
 		if (remainingTime % 2 == 0) {
 			color = minion.getColor();
 		} else {
@@ -44,7 +44,7 @@ public class AppearanceMinionDamaged implements IRenderator {
 		int yOffset = r.nextInt(4) - 2;
 		
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(color.red, color.green, color.blue, 1);
+		shapeRenderer.setColor(color.r, color.g, color.b, 1);
 		shapeRenderer.rect(x + xOffset, y + yOffset, size, size);
 		shapeRenderer.end();
 		
