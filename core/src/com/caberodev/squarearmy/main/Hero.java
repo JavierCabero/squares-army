@@ -127,7 +127,6 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 		/* Check if enemy minions are too close so we call minions to defend */
 		lookForNearbyEnemyMinions();
 		
-		
 		if (isPlayer) {
 			attack();
 

@@ -25,5 +25,4 @@ public class AppearanceSquare extends Shape implements IRenderator {
 		shapeRenderer.rect(x, y, size, size);	
 		shapeRenderer.end();
 	}
-
 }

@@ -15,7 +15,6 @@ public class HeroCamera extends OrthographicCamera {
 	private static float camera_smooth = 32f;
 	private static Vec2  last_camera_pos;
 	
-	
 	public HeroCamera() {
 		last_camera_pos = new Vec2(position.x, position.y);
 	}
@@ -35,6 +34,8 @@ public class HeroCamera extends OrthographicCamera {
 		
 		dx /= camera_smooth;
 		dy /= camera_smooth;
+
+		System.out.println(dx + " " + dy);
 		
 		position.x = last_camera_pos.x + dx;
 		position.y = last_camera_pos.y + dy;

@@ -11,8 +11,14 @@ import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.health.BasicHealth;
 import com.caberodev.squarearmy.health.IHealth;
 
-/* 
- * Minions 
+/** 
+ * 
+ *  @author Javier Cabero Guerra <br>
+ * 
+ * Copyright 2015 (c) All Rights Reserved. <br><br>
+ * 
+ * 
+ * Minions <br>
  * 
  * 	They will be found in the World in random places.
  * They can be collected to form an army. Then you will be
@@ -23,9 +29,9 @@ import com.caberodev.squarearmy.health.IHealth;
 public class Minion extends AbstractMoveableEntity implements IRenderable {
 
 	/* Constants */
-	private static final int INITIAL_HP = 10;
+	private static final int         INITIAL_HP = 10;
 	private static final Double ATTACK_DISTANCE = 50.0;
-	private static final int ATTACK_DAMAGE = 1;
+	private static final int      ATTACK_DAMAGE = 1;
 
 	/* Variables */
 	private float size = 4;

@@ -1,28 +1,23 @@
 package com.caberodev.squarearmy.appearance;
 import java.util.Random;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.main.Hero;
 
-
-public class AppearanceHeroDamaged implements IRenderator {
+public class AppearanceHeroDamaged extends Shape implements IRenderator {
 
 	/* Constants */
 	public static final int APPEARANCE_TIME = 15;
 	private static final Color damagedColor = Color.WHITE;
 
 	/* Variables */
-	private ShapeRenderer shapeRenderer;
 	private Hero hero;
 	private IRenderator lastAppearance;
 	private int remainingTime = APPEARANCE_TIME;
 	private Random r = new Random();
 
 	public AppearanceHeroDamaged(Hero hero, IRenderator lastAppearance) {
-		this.shapeRenderer = DrawEngine.shapeRenderer;
 		this.hero = hero;
 		this.lastAppearance = lastAppearance;
 	}
@@ -55,5 +50,4 @@ public class AppearanceHeroDamaged implements IRenderator {
 			hero.setAppearance(lastAppearance);
 		}
 	}
-
 }

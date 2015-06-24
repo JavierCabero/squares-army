@@ -1,13 +1,11 @@
 package com.caberodev.squarearmy.appearance;
 import java.util.Random;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.main.Minion;
 
-public class AppearanceMinionDamaged implements IRenderator {
+public class AppearanceMinionDamaged extends Shape implements IRenderator {
 
 	/* Constants */
 	private static final int APPEARANCE_TIME = 15;
@@ -15,14 +13,12 @@ public class AppearanceMinionDamaged implements IRenderator {
 
 	
 	/* Variables */
-	private ShapeRenderer shapeRenderer;
 	private Minion minion;
 	private IRenderator lastAppearance;
 	private int remainingTime = APPEARANCE_TIME;
 	private Random r = new Random();
 
 	public AppearanceMinionDamaged(Minion minion, IRenderator lastAppearance) {
-		this.shapeRenderer = DrawEngine.shapeRenderer;
 		this.minion = minion;
 		this.lastAppearance = lastAppearance;
 	}

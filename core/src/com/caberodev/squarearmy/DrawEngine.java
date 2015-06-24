@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.caberodev.squarearmy.appearance.Shape;
 
 /**
  * 
@@ -26,9 +26,6 @@ public class DrawEngine {
 	// Default font for 2D text
 	public static BitmapFont font;
 
-	// For rendering shapes
-	public static ShapeRenderer shapeRenderer;
-	
 	// List for drawables
 	private static ArrayList<Drawable> drawList;
 	private static ArrayList<Text2D> textList;
@@ -65,21 +62,22 @@ public class DrawEngine {
 		drawList = new ArrayList<Drawable>();
 		textList = new ArrayList<Text2D>();
         camera   = new HeroCamera();
-        shapeRenderer = new ShapeRenderer();
         
-        Text2D text = new Text2D(batch, font, 15, Gdx.graphics.getHeight() - 15);
-        text.setText("Dev Text | Screen (" 
+        Text2D screenInfo = new Text2D(batch, font, 15, Gdx.graphics.getHeight() - 15);
+        screenInfo.setText("Dev Text | Screen (" 
         		+ Gdx.graphics.getWidth() + ", " 
         		+ Gdx.graphics.getHeight() 
         		+ ") Density: " + Gdx.graphics.getDensity());
         
+        Text2D playerInfo = new Text2D(batch, font, 15, Gdx.graphics.getHeight() - 55);
+        playerInfo.setText("Player: (0, 0)"); // TODO: Connect with hero player
 	}
 	
 	public static void draw() {
 		
 		// Update game camera
 		camera.followHeroPlayer(); 
-		shapeRenderer.setProjectionMatrix(camera.combined);
+		Shape.shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		// Clear and set background tint
 		Gdx.gl.glClearColor(bgColor.x, bgColor.y, bgColor.z, bgColor.w);
@@ -96,6 +94,5 @@ public class DrawEngine {
 		for(Text2D item : textList)
 			item.draw();
 		batch.end();
-		
 	}
 }
