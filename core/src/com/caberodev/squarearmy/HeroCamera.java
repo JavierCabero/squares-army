@@ -35,8 +35,6 @@ public class HeroCamera extends OrthographicCamera {
 		dx /= camera_smooth;
 		dy /= camera_smooth;
 
-		System.out.println(dx + " " + dy);
-		
 		position.x = last_camera_pos.x + dx;
 		position.y = last_camera_pos.y + dy;
 		

@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.Drawable;
 import com.caberodev.squarearmy.LogicEngine;
 import com.caberodev.squarearmy.Thinker;
+import com.caberodev.squarearmy.appearance.Shape;
 import com.caberodev.squarearmy.behavior.BehaviorMinionFollowHero;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.util.RandomData;
@@ -58,6 +61,8 @@ public class World implements Thinker, Drawable {
 //	private final Double alpha   = Math.asin(Gdx.graphics.getHeight() / Math.sqrt((Gdx.graphics.getWidth()  * Gdx.graphics.getWidth()) + 
 //			                		       									      (Gdx.graphics.getHeight() * Gdx.graphics.getHeight())));
 
+	private ShapeRenderer barRenderer = new ShapeRenderer();
+	
 	public World() {
 
 		// Create neutral Minions 
@@ -244,8 +249,8 @@ public class World implements Thinker, Drawable {
 			m.render();
 		}
 
-		// TODO: renderArmiesLength();
-		// TODO: renderHeroesHealth();
+		renderArmiesLength();
+		renderHeroesHealth();
 //		renderEnemyLocatorArrow();
 	}
 
@@ -380,25 +385,22 @@ public class World implements Thinker, Drawable {
 //
 //	}
 
-	/*
+	float health_bar_scale = 3;
+	float army_bar_scale = 1;
+	
 	private void renderHeroesHealth() {
 		// All bars will be rendered on top left 
 		int numHero = 1;
+		
 		for (Hero hero : heroes) {
 			// Get info 
-			int heroHealth = hero.getHealth() * 3;
-			EntityColor color = hero.getColor();
+			Color color = hero.getColor();
 
-			// Render bar 
-			glColor3f(color.red, color.green, color.blue);
-
-			glBegin(GL_QUADS);
-			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-left
-			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15 - heroHealth, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-right
-			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15 - heroHealth, -offsetY + Gdx.graphics.getHeight() - numHero * 15
-					- 10); // Bottom-right
-			glVertex2f(-offsetX + Gdx.graphics.getWidth() - 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15 - 10); // Botton-left
-			glEnd();
+			// Render bar
+			barRenderer.setColor(color.r, color.g, color.b, color.a);
+			barRenderer.begin(ShapeType.Filled);
+			barRenderer.rect(15, numHero * 15, hero.getHealth() * health_bar_scale, 10);
+			barRenderer.end();
 			numHero++;
 		}
 	}
@@ -409,21 +411,17 @@ public class World implements Thinker, Drawable {
 		for (Hero hero : heroes) {
 			// Get info 
 			int numMinions = 1 + hero.getNumMinions();
-			EntityColor color = hero.getColor();
+			Color color = hero.getColor();
 
 			// Render bar 
-			glColor3f(color.red, color.green, color.blue);
-
-			glBegin(GL_QUADS);
-			glVertex2f(-offsetX + 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-left
-			glVertex2f(-offsetX + 15 + numMinions, -offsetY + Gdx.graphics.getHeight() - numHero * 15); // Upper-right
-			glVertex2f(-offsetX + 15 + numMinions, -offsetY + Gdx.graphics.getHeight() - numHero * 15 - 10); // Bottom-right
-			glVertex2f(-offsetX + 15, -offsetY + Gdx.graphics.getHeight() - numHero * 15 - 10); // Botton-left
-			glEnd();
+			barRenderer.setColor(color.r, color.g, color.b, color.a);
+			barRenderer.begin(ShapeType.Filled);
+			barRenderer.rect(Gdx.graphics.getWidth() - 15, numHero * 15, -numMinions * health_bar_scale, 10);
+			barRenderer.end();
 			numHero++;
 		}
 	}
-	*/
+	
 	
 	private void removeDeadMinions() {
 		for (Minion m : deadMinions) {
@@ -477,9 +475,7 @@ public class World implements Thinker, Drawable {
 				m.setBehavior(new BehaviorMinionFollowHero(hero, m));
 				minionsCaptured.add(m);
 				hero.addMinion(m);
-				
 			}
-
 		}
 
 		neutralMinions.removeAll(minionsCaptured);
