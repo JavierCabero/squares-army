@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.main;
+package com.caberodev.squarearmy.world;
 
 import com.caberodev.squarearmy.appearance.AppearanceMinionDamaged;
 import com.caberodev.squarearmy.appearance.AppearanceSquare;

@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.main;
+package com.caberodev.squarearmy.world;
 
 import java.util.HashSet;
 import java.util.Random;

@@ -3,7 +3,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.entity.Color;
-import com.caberodev.squarearmy.main.Hero;
+import com.caberodev.squarearmy.world.Hero;
 
 public class AppearanceHeroDamaged extends Shape implements IRenderator {
 

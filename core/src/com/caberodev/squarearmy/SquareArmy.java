@@ -1,7 +1,7 @@
 package com.caberodev.squarearmy;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.caberodev.squarearmy.main.World;
+import com.caberodev.squarearmy.world.World;
 
 /**
  * 

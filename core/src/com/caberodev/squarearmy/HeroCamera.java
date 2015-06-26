@@ -1,7 +1,7 @@
 package com.caberodev.squarearmy;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.caberodev.squarearmy.main.Hero;
+import com.caberodev.squarearmy.world.Hero;
 
 /**
  * 

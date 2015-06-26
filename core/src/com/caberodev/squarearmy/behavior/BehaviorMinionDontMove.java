@@ -1,7 +1,7 @@
 package com.caberodev.squarearmy.behavior;
-import com.caberodev.squarearmy.main.Hero;
-import com.caberodev.squarearmy.main.Minion;
-import com.caberodev.squarearmy.main.World;
+import com.caberodev.squarearmy.world.Hero;
+import com.caberodev.squarearmy.world.Minion;
+import com.caberodev.squarearmy.world.World;
 
 public class BehaviorMinionDontMove implements IBehavior {
 

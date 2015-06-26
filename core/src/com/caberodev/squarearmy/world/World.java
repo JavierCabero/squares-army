@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.main;
+package com.caberodev.squarearmy.world;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,7 +12,6 @@ import com.caberodev.squarearmy.DrawEngine;
 import com.caberodev.squarearmy.Drawable;
 import com.caberodev.squarearmy.LogicEngine;
 import com.caberodev.squarearmy.Thinker;
-import com.caberodev.squarearmy.appearance.Shape;
 import com.caberodev.squarearmy.behavior.BehaviorMinionFollowHero;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.util.RandomData;
