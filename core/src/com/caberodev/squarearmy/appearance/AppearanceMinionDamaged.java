@@ -2,7 +2,7 @@ package com.caberodev.squarearmy.appearance;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.caberodev.squarearmy.entity.Color;
+import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.world.Minion;
 
 public class AppearanceMinionDamaged extends ShapeDrawer implements IRenderator {
@@ -27,7 +27,7 @@ public class AppearanceMinionDamaged extends ShapeDrawer implements IRenderator 
 		/* Get parameters */
 		float x = minion.x;
 		float y = minion.y;
-		float size = minion.getSize();
+		float size = minion.size;
 
 		Color color;
 		if (remainingTime % 2 == 0) {

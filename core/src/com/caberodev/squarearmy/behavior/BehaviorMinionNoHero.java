@@ -2,7 +2,7 @@ package com.caberodev.squarearmy.behavior;
 
 import java.util.Random;
 
-import com.caberodev.squarearmy.entity.Color;
+import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.world.Minion;
 
 /* Random moves at random intervals */

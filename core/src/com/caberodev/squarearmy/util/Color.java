@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.entity;
+package com.caberodev.squarearmy.util;
 
 /**
  * 

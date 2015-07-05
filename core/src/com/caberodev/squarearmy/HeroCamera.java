@@ -1,7 +1,7 @@
 package com.caberodev.squarearmy;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.caberodev.squarearmy.world.Hero;
+import com.caberodev.squarearmy.behavior.BehaviorHeroPlayer;
 
 /**
  * 
@@ -29,8 +29,8 @@ public class HeroCamera extends OrthographicCamera {
 		// work well.
 		setToOrtho(false);
 		
-		float dx = Hero.player.x - last_camera_pos.x;
-		float dy = Hero.player.y - last_camera_pos.y;
+		float dx = BehaviorHeroPlayer.player.x - last_camera_pos.x;
+		float dy = BehaviorHeroPlayer.player.y - last_camera_pos.y;
 		
 		dx /= camera_smooth;
 		dy /= camera_smooth;

@@ -2,7 +2,7 @@ package com.caberodev.squarearmy.appearance;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.caberodev.squarearmy.entity.Color;
+import com.caberodev.squarearmy.util.Color;
 
 public class MiddleScreenTexture {
 

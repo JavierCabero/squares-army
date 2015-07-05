@@ -3,9 +3,9 @@ package com.caberodev.squarearmy.world;
 import com.caberodev.squarearmy.appearance.SquareDrawer;
 import com.caberodev.squarearmy.behavior.BehaviorMinionNoHero;
 import com.caberodev.squarearmy.behavior.IBehavior;
-import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.health.BasicHealth;
 import com.caberodev.squarearmy.health.IHealth;
+import com.caberodev.squarearmy.util.Color;
 
 /** 
  * 
@@ -30,7 +30,7 @@ public class Minion extends WorldObject {
 	private static final int      ATTACK_DAMAGE = 1;
 
 	/* Variables */
-	private float size = 4;
+	public float size = 4;
 	private Color color;
 	private IHealth health;
 	private IBehavior behavior;
@@ -101,9 +101,5 @@ public class Minion extends WorldObject {
 
 	public int getAttackDamage() {
 		return ATTACK_DAMAGE;
-	}
-
-	public float getSize() {
-		return size;
 	}
 }

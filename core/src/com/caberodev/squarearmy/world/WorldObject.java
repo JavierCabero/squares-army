@@ -1,6 +1,7 @@
 package com.caberodev.squarearmy.world;
 
 import com.caberodev.squarearmy.Drawer;
+import com.caberodev.squarearmy.Hearer;
 import com.caberodev.squarearmy.Thinker;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
@@ -14,12 +15,12 @@ import com.caberodev.squarearmy.util.ListLinker;
  * A WorldObject is the class that every object in the world extends. 
  * <br>It provides:<br> 
  * <ul>
- * <li>Location (by its connection with the Octree)</li>
- * <li>List linkage</li>
- * <li> TODO: Oriented Bounding Box</li>
+ *   <li>Location (by its connection with the Octree)</li>
+ *   <li>List linkage</li>
+ *   <li> TODO: Oriented Bounding Box</li>
  * </ul>
  */
-public abstract class WorldObject implements Thinker, Drawer {
+public abstract class WorldObject implements Thinker, Drawer, Hearer {
 
 	// Position in world
 	public float x, y;
@@ -51,15 +52,12 @@ public abstract class WorldObject implements Thinker, Drawer {
 		ListLinker.del(this);
 	}
 	
+	@Override
 	public void think(float delta){
 		x += dx;
 		y += dy;
 		
 		movementReduction();
-	}
-	
-	public void draw() {
-		// Nothing
 	}
 	
 	private void movementReduction() {
@@ -86,5 +84,16 @@ public abstract class WorldObject implements Thinker, Drawer {
 				dy = 0;
 			}
 		}
+	}
+	
+	@Override
+	public void draw() {
+		// Nothing
+	}
+
+	
+	@Override
+	public void hear() {
+		// Nothing
 	}
 }

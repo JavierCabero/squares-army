@@ -2,7 +2,7 @@ package com.caberodev.squarearmy.appearance;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.Drawer;
-import com.caberodev.squarearmy.entity.Color;
+import com.caberodev.squarearmy.util.Color;
 
 /**
  * 
