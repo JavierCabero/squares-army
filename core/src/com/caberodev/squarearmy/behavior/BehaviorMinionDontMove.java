@@ -28,14 +28,15 @@ public class BehaviorMinionDontMove implements IBehavior {
 			/* If the hero is an enemy hero (Because now it is death-match) */
 			if (!h.equals(hero)) {
 				/* For each minion we calculate if it is close enough to attack */
-				float xDistance = h.getX() - minion.getX();
-				float yDistance = h.getY() - minion.getY();
+				float xDistance = h.x - minion.x;
+				float yDistance = h.y - minion.y;
 				Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 				/* Check distance */
 				if (realDistance < minion.getAttackDistance()) {
 					usedAttack = true;
-					h.damage(minion, minion.getAttackDamage());
+					// TODO: Use messages
+//					h.damage(minion, minion.getAttackDamage());
 					break;
 				}
 			}
@@ -51,8 +52,8 @@ public class BehaviorMinionDontMove implements IBehavior {
 			if (!h.equals(hero)) {
 				/* For each minion we calculate if it is close enough to attack */
 				for (Minion enemyMinion : h.getMinions()) {
-					float xDistance = enemyMinion.getX() - minion.getX();
-					float yDistance = enemyMinion.getY() - minion.getY();
+					float xDistance = enemyMinion.x - minion.x;
+					float yDistance = enemyMinion.y - minion.y;
 					Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 					/* Check distance */

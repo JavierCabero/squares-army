@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.caberodev.squarearmy.entity.Color;
 
-public class MiddleScreenTexture implements IRenderable {
+public class MiddleScreenTexture {
 
 	private Texture texture;
 	private float x, y;

@@ -41,8 +41,8 @@ public class BehaviorMinionDefendHero implements IBehavior {
 			/* Random move to the hero */
 			float newDx, newDy, xDistance, yDistance;
 
-			xDistance = hero.getX() - minion.getX();
-			yDistance = hero.getY() - minion.getY();
+			xDistance = hero.x - minion.x;
+			yDistance = hero.y - minion.y;
 
 			if (Math.abs(xDistance) > MAX_MOVEMENT_DISTANCE) {
 				newDx = MAX_MOVEMENT_DISTANCE;
@@ -62,8 +62,8 @@ public class BehaviorMinionDefendHero implements IBehavior {
 			if (yDistance < 0) {
 				newDy *= -1;
 			}
-			minion.setDx(newDx);
-			minion.setDy(newDy);
+			minion.dx = newDx;
+			minion.dy = newDy;
 
 			/* Random wait */
 			delayUntilNextMove = r.nextInt(TOP_MOVEMENT_DELAY / 4);
@@ -90,14 +90,15 @@ public class BehaviorMinionDefendHero implements IBehavior {
 			/* If the hero is an enemy hero (Because now it is death-match) */
 			if (!h.equals(hero)) {
 				/* For each minion we calculate if it is close enough to attack */
-				float xDistance = h.getX() - minion.getX();
-				float yDistance = h.getY() - minion.getY();
+				float xDistance = h.x - minion.x;
+				float yDistance = h.y - minion.y;
 				Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 				/* Check distance */
 				if (realDistance < minion.getAttackDistance()) {
 					usedAttack = true;
-					h.damage(minion, minion.getAttackDamage());
+					// Use messages
+//					h.damage(minion, minion.getAttackDamage());
 					break;
 				}
 			}
@@ -113,8 +114,8 @@ public class BehaviorMinionDefendHero implements IBehavior {
 			if (!h.equals(hero)) {
 				/* For each minion we calculate if it is close enough to attack */
 				for (Minion enemyMinion : h.getMinions()) {
-					float xDistance = enemyMinion.getX() - minion.getX();
-					float yDistance = enemyMinion.getY() - minion.getY();
+					float xDistance = enemyMinion.x - minion.x;
+					float yDistance = enemyMinion.y - minion.y;
 					Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 					/* Check distance */

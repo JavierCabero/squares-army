@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.caberodev.squarearmy.appearance.Shape;
+import com.caberodev.squarearmy.appearance.ShapeDrawer;
 
 /**
  * 
@@ -27,17 +27,17 @@ public class DrawEngine {
 	public static BitmapFont font;
 
 	// List for drawables
-	private static ArrayList<Drawable> drawList;
+	private static ArrayList<Drawer> drawList;
 	private static ArrayList<Text2D> textList;
 	
 	// Background color
 	public static Vec4 bgColor = new Vec4(0.58f, 0.58f, 0.7f, 1);
 	
-	public static void addDrawable(Drawable item) {
+	public static void addDrawable(Drawer item) {
 		drawList.add(item);
 	}
 	
-	public static void delDrawable(Drawable item) {
+	public static void delDrawable(Drawer item) {
 		drawList.remove(item);
 	}
 	
@@ -59,7 +59,7 @@ public class DrawEngine {
 				 			  Gdx.files.internal("data/calibri.png"), 
 				 			  false);
 		
-		drawList = new ArrayList<Drawable>();
+		drawList = new ArrayList<Drawer>();
 		textList = new ArrayList<Text2D>();
         camera   = new HeroCamera();
         
@@ -77,7 +77,7 @@ public class DrawEngine {
 		
 		// Update game camera
 		camera.followHeroPlayer(); 
-		Shape.shapeRenderer.setProjectionMatrix(camera.combined);
+		ShapeDrawer.shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		// Clear and set background tint
 		Gdx.gl.glClearColor(bgColor.x, bgColor.y, bgColor.z, bgColor.w);
@@ -85,7 +85,7 @@ public class DrawEngine {
 		
 		// Shape drawing
 		batch.begin();
-		for(Drawable item : drawList) 
+		for(Drawer item : drawList) 
 			item.draw();
 		batch.end();
 		

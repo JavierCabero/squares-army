@@ -36,8 +36,8 @@ public class BehaviorHeroAttackTo implements IBehavior {
 			if (h.equals(hero) || h.equals(hero_enemy))
 				continue;
 
-			float xDistance = h.getX() - hero.getX();
-			float yDistance = h.getY() - hero.getY();
+			float xDistance = h.x - hero.x;
+			float yDistance = h.y - hero.y;
 			Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 			if (realDistance < distance) {
 				distance = realDistance;
@@ -58,8 +58,8 @@ public class BehaviorHeroAttackTo implements IBehavior {
 			}
 		}
 		if (true) { /* To reuse the name of the variables */
-			float xDistance = hero_enemy.getX() - hero.getX();
-			float yDistance = hero_enemy.getY() - hero.getY();
+			float xDistance = hero_enemy.x - hero.x;
+			float yDistance = hero_enemy.y - hero.y;
 			Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 			if (realDistance > hero.getSightDistance()) {
 				hero.setBehavior(new BehaviorHeroCollectMinions(hero), false);
@@ -71,18 +71,18 @@ public class BehaviorHeroAttackTo implements IBehavior {
 		hero.getWorld().requestMinionsFor(hero);
 
 		/* Run to a secure distance */
-		float xDistance = hero_enemy.getX() - hero.getX();
-		float yDistance = hero_enemy.getY() - hero.getY();
+		float xDistance = hero_enemy.x - hero.x;
+		float yDistance = hero_enemy.y - hero.y;
 
 		if (xDistance > 0) {
-			hero.setDx(hero.getMovementspeed());
+			hero.dx = hero.getMovementspeed();
 		} else {
-			hero.setDx(-hero.getMovementspeed());
+			hero.dx = -hero.getMovementspeed();
 		}
 		if (yDistance > 0) {
-			hero.setDy(hero.getMovementspeed());
+			hero.dy = hero.getMovementspeed();
 		} else {
-			hero.setDy(-hero.getMovementspeed());
+			hero.dy = -hero.getMovementspeed();
 
 		}
 	}
@@ -98,14 +98,15 @@ public class BehaviorHeroAttackTo implements IBehavior {
 			/* If the hero is an enemy hero (Because now it is death-match) */
 			if (!h.equals(hero)) {
 				/* For each minion we calculate if it is close enough to attack */
-				float xDistance = h.getX() - hero.getX();
-				float yDistance = h.getY() - hero.getY();
+				float xDistance = h.x - hero.x;
+				float yDistance = h.y - hero.y;
 				Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 				/* Check distance */
 				if (realDistance < hero.getAttackDistance()) {
 					usedAttack = true;
-					h.damage(hero, hero.getAttackDamage());
+					// TODO: Use Messages
+//					h.damage(hero, hero.getAttackDamage());
 					break;
 				}
 			}
@@ -121,8 +122,8 @@ public class BehaviorHeroAttackTo implements IBehavior {
 			if (!h.equals(hero)) {
 				/* For each minion we calculate if it is close enough to attack */
 				for (Minion enemyMinion : h.getMinions()) {
-					float xDistance = enemyMinion.getX() - hero.getX();
-					float yDistance = enemyMinion.getY() - hero.getY();
+					float xDistance = enemyMinion.x - hero.x;
+					float yDistance = enemyMinion.y - hero.y;
 					Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 					/* Check distance */

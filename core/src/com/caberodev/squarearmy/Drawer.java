@@ -7,7 +7,7 @@ package com.caberodev.squarearmy;
  * Copyright 2015 (c) All Rights Reserved.
  *                                          
  */
-public interface Drawable {
+public interface Drawer {
 
 	public void draw();
 }

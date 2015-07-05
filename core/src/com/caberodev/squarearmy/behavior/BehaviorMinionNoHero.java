@@ -38,8 +38,8 @@ public class BehaviorMinionNoHero implements IBehavior {
 			delayUntilNextMove--;
 		} else {
 			/* Random move */
-			m.setDx(MAX_MOVEMENT / 2 - r.nextInt(MAX_MOVEMENT));
-			m.setDy(MAX_MOVEMENT / 2 - r.nextInt(MAX_MOVEMENT));
+			m.dx = MAX_MOVEMENT / 2 - r.nextInt(MAX_MOVEMENT);
+			m.dy = MAX_MOVEMENT / 2 - r.nextInt(MAX_MOVEMENT);
 
 			/* Random wait */
 			delayUntilNextMove = r.nextInt(MAX_DELAY);

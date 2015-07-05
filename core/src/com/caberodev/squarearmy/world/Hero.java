@@ -1,28 +1,22 @@
 package com.caberodev.squarearmy.world;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 import com.caberodev.squarearmy.InputEngine;
 import com.caberodev.squarearmy.Vec2;
-import com.caberodev.squarearmy.appearance.AppearanceHeroDamaged;
-import com.caberodev.squarearmy.appearance.AppearanceSquare;
-import com.caberodev.squarearmy.appearance.IRenderable;
-import com.caberodev.squarearmy.appearance.IRenderator;
+import com.caberodev.squarearmy.appearance.SquareDrawer;
 import com.caberodev.squarearmy.attack.BasicAttack;
 import com.caberodev.squarearmy.attack.IAttack;
-import com.caberodev.squarearmy.behavior.BehaviorHeroAttackTo;
 import com.caberodev.squarearmy.behavior.BehaviorHeroCollectMinions;
-import com.caberodev.squarearmy.behavior.BehaviorHeroRunFrom;
 import com.caberodev.squarearmy.behavior.BehaviorMinionDefendHero;
 import com.caberodev.squarearmy.behavior.BehaviorMinionNoHero;
 import com.caberodev.squarearmy.behavior.IBehavior;
-import com.caberodev.squarearmy.entity.AbstractMoveableEntity;
-import com.caberodev.squarearmy.entity.Entity;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.health.BasicHealth;
 import com.caberodev.squarearmy.health.IHealth;
+import com.caberodev.squarearmy.util.RandomData;
+import com.sun.xml.internal.stream.Entity;
 
 /* Hero
  * 
@@ -31,7 +25,7 @@ import com.caberodev.squarearmy.health.IHealth;
  * can in order to make your army bigger.
  */
 
-public class Hero extends AbstractMoveableEntity implements IRenderable {
+public class Hero extends WorldObject {
 
 	/* Constants */
 	private static final int MAX_HEALTH = 25;
@@ -52,8 +46,7 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	private World world;
 	private boolean isPlayer;
 	private int AILevel = IMPOSSIBLE;
-	private Random r = new Random();
-	private IRenderator appearance;
+	private SquareDrawer squareDrawer;
 	private IHealth health;
 	private IAttack attack;
 	private final float sightDistance = 300f;
@@ -84,33 +77,29 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 		/* Default behavior: Collect minions */
 		behavior = new BehaviorHeroCollectMinions(this);
 
-		/* Default appearance : Square appearance */
-		appearance = new AppearanceSquare(this);
+		/* Default squareDrawer : Square squareDrawer */
+		squareDrawer = new SquareDrawer();
+		squareDrawer.size = 15f;
 	}
 
 	public void damage(Entity source, int dmg) {
 
 		/* Notify hero's dead */
-		if (!appearance.getClass().equals(AppearanceHeroDamaged.class) && health.damage(dmg)) {
+		/* TODO: Use states stored in the data dictionary 
+		if (!squareDrawer.getClass().equals(squareDrawerHeroDamaged.class) && health.damage(dmg)) {
 			world.addDeadHero(this);
-		} else if (!appearance.getClass().equals(AppearanceHeroDamaged.class)) {
-			setAppearance(new AppearanceHeroDamaged(this, getAppearance()));
+		} else if (!squareDrawer.getClass().equals(squareDrawerHeroDamaged.class)) {
+			setsquareDrawer(new squareDrawerHeroDamaged(this, getsquareDrawer()));
 			if (!behavior.getClass().equals(BehaviorHeroAttackTo.class))
 				setBehavior(new BehaviorHeroRunFrom(this, source), true);
 		}
+		*/
 	}
 
-	public void setAppearance(IRenderator appearance) {
-		this.appearance = appearance;
-
-	}
-
-	public void render() {
-		appearance.render();
-	}
-
-	public IRenderator getAppearance() {
-		return appearance;
+	public void draw() {
+		squareDrawer.x = x;
+		squareDrawer.y = y;
+		squareDrawer.draw();
 	}
 
 	public void setPlayer(boolean isPlayer) {
@@ -122,8 +111,11 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	}
 
 	/* This will make the hero move */
-	public void update() {
+	public void think(float delta) {
 
+		// Apply movement 
+		super.think(delta);
+		
 		/* Check if enemy minions are too close so we call minions to defend */
 		lookForNearbyEnemyMinions();
 		
@@ -133,21 +125,15 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 			// Read keyboard 
 			readInput();
 		} else {
-			if (r.nextInt() % AILevel == 0)
+			if (RandomData.nextInt() % AILevel == 0)
 				behavior.update();
 		}
-
-		// Apply movement 
-		super.update();
 
 		// Camera follows
 		if(isPlayer) {
 			player.x = x;
 			player.y = y;
 		}
-		
-		// Reduce movement (friction)
-		movementReduction();
 	}
 
 	private void attack() {
@@ -161,14 +147,15 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 			/* If the hero is an enemy hero (Because now it is death-match) */
 			if (!h.equals(this)) {
 				/* For each minion we calculate if it is close enough to attack */
-				float xDistance = h.getX() - getX();
-				float yDistance = h.getY() - getY();
+				float xDistance = h.x - x;
+				float yDistance = h.y - y;
 				Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 				/* Check distance */
 				if (realDistance < getAttackDistance()) {
 					usedAttack = true;
-					h.damage(this, getAttackDamage());
+					// TODO: Use messages
+//					h.damage(this, getAttackDamage());
 					break;
 				}
 			}
@@ -184,8 +171,8 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 			if (!h.equals(this)) {
 				/* For each minion we calculate if it is close enough to attack */
 				for (Minion enemyMinion : h.getMinions()) {
-					float xDistance = enemyMinion.getX() - getX();
-					float yDistance = enemyMinion.getY() - getY();
+					float xDistance = enemyMinion.x - x;
+					float yDistance = enemyMinion.y - y;
 					Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
 					/* Check distance */
@@ -270,32 +257,6 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 		return callDistance;
 	}
 
-	private void movementReduction() {
-		/* Movement reduction */
-		if (dx > 0) {
-			dx--;
-			if (dx < 1) {
-				dx = 0;
-			}
-		} else if (dx < 0) {
-			dx++;
-			if (dx > -1) {
-				dx = 0;
-			}
-		}
-		if (dy > 0) {
-			dy--;
-			if (dy < 1) {
-				dy = 0;
-			}
-		} else if (dy < 0) {
-			dy++;
-			if (dy > -1) {
-				dy = 0;
-			}
-		}
-	}
-
 	public Color getColor() {
 		return color;
 	}
@@ -322,8 +283,8 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 			if (!h.equals(this)) {
 				/* For each minion we calculate if it is too close */
 				for (Minion m : h.getMinions()) {
-					float xDistance = m.getX() - getX();
-					float yDistance = m.getY() - getY();
+					float xDistance = m.x - x;
+					float yDistance = m.y - y;
 					Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 					/* Check distance */
 					if(realDistance < 0){
@@ -398,5 +359,4 @@ public class Hero extends AbstractMoveableEntity implements IRenderable {
 	public int getMaxHealth() {
 		return MAX_HEALTH;
 	}
-
 }

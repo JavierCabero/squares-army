@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.world.Minion;
 
-public class AppearanceMinionDamaged extends Shape implements IRenderator {
+public class AppearanceMinionDamaged extends ShapeDrawer implements IRenderator {
 
 	/* Constants */
 	private static final int APPEARANCE_TIME = 15;
@@ -14,19 +14,19 @@ public class AppearanceMinionDamaged extends Shape implements IRenderator {
 	
 	/* Variables */
 	private Minion minion;
-	private IRenderator lastAppearance;
+//	private IRenderator lastAppearance;
 	private int remainingTime = APPEARANCE_TIME;
 	private Random r = new Random();
 
 	public AppearanceMinionDamaged(Minion minion, IRenderator lastAppearance) {
 		this.minion = minion;
-		this.lastAppearance = lastAppearance;
+//		this.lastAppearance = lastAppearance;
 	}
 
 	public void render() {
 		/* Get parameters */
-		float x = minion.getX();
-		float y = minion.getY();
+		float x = minion.x;
+		float y = minion.y;
 		float size = minion.getSize();
 
 		Color color;
@@ -48,7 +48,8 @@ public class AppearanceMinionDamaged extends Shape implements IRenderator {
 		remainingTime--;
 		/* If the time reaches 0 then we restore the last appearance */
 		if (remainingTime <= 0) {
-			minion.setAppearance(lastAppearance);
+			// TODO: Refactor this class as drawer effect
+//			minion.setAppearance(lastAppearance);
 		}
 	}
 

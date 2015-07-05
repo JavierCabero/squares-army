@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * Copyright 2015 (c) All Rights Reserved.
  *                                          
  */
-public class Text2D implements Drawable {
+public class Text2D implements Drawer {
 
 	// Tools
 	private SpriteBatch batch;

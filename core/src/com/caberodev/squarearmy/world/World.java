@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.caberodev.squarearmy.DrawEngine;
-import com.caberodev.squarearmy.Drawable;
+import com.caberodev.squarearmy.Drawer;
 import com.caberodev.squarearmy.LogicEngine;
 import com.caberodev.squarearmy.Thinker;
 import com.caberodev.squarearmy.behavior.BehaviorMinionFollowHero;
@@ -30,7 +30,7 @@ import com.caberodev.squarearmy.util.RandomData;
  * 
  * The information about minions and heroes is stored here.
  */
-public class World implements Thinker, Drawable {
+public class World implements Thinker, Drawer {
 
 	// Constants
 	public static final float CUT_DISTANCE   = 768f; /* To cut some calculus */
@@ -111,12 +111,12 @@ public class World implements Thinker, Drawable {
 
 		/* Update heroes */
 		for (Hero h : heroes) {
-			h.update();
+			h.think(delta);
 		}
 		
 		/* Update minions */
 		for (Minion m : minions) {
-			m.update();
+			m.think(delta);
 		}
 
 		if (numMinions < MAX_NUM_MINIONS) {
@@ -124,18 +124,18 @@ public class World implements Thinker, Drawable {
 			int i = RandomData.nextInt(MINIONS_MAX_X_DISTANCE);
 			int j = RandomData.nextInt(MINIONS_MAX_Y_DISTANCE);
 			if (i % 2 == 0) {
-				x = (int) player.getX() + Gdx.graphics.getWidth() / 2 + i;
+				x = (int) player.x + Gdx.graphics.getWidth() / 2 + i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
+					y = (int) player.y + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
+					y = (int) player.y - Gdx.graphics.getHeight() / 2 - j;
 				}
 			} else {
-				x = (int) player.getX() - Gdx.graphics.getWidth() / 2 - i;
+				x = (int) player.x - Gdx.graphics.getWidth() / 2 - i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
+					y = (int) player.y + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
+					y = (int) player.y - Gdx.graphics.getHeight() / 2 - j;
 				}
 			}
 			Minion m = new Minion(this, x, y);
@@ -146,8 +146,8 @@ public class World implements Thinker, Drawable {
 
 		for (Minion m : minions) {
 
-			float xDistance = m.getX() - player.getX();
-			float yDistance = m.getY() - player.getY();
+			float xDistance = m.x - player.x;
+			float yDistance = m.y - player.y;
 
 			Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
@@ -161,18 +161,18 @@ public class World implements Thinker, Drawable {
 			int i = RandomData.nextInt(MINIONS_MAX_X_DISTANCE);
 			int j = RandomData.nextInt(MINIONS_MAX_Y_DISTANCE);
 			if (i % 2 == 0) {
-				x = (int) player.getX() + Gdx.graphics.getWidth() / 2 + i;
+				x = (int) player.x + Gdx.graphics.getWidth() / 2 + i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
+					y = (int) player.y + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
+					y = (int) player.y - Gdx.graphics.getHeight() / 2 - j;
 				}
 			} else {
-				x = (int) player.getX() - Gdx.graphics.getWidth() / 2 - i;
+				x = (int) player.x - Gdx.graphics.getWidth() / 2 - i;
 				if (j % 2 == 0) {
-					y = (int) player.getY() + Gdx.graphics.getHeight() / 2 + j;
+					y = (int) player.y + Gdx.graphics.getHeight() / 2 + j;
 				} else {
-					y = (int) player.getY() - Gdx.graphics.getHeight() / 2 - j;
+					y = (int) player.y - Gdx.graphics.getHeight() / 2 - j;
 				}
 			}
 			Hero h = new Hero(x, y);
@@ -201,8 +201,8 @@ public class World implements Thinker, Drawable {
 		}
 
 		for (Hero h : heroes) {
-			float xDistance = h.getX() - player.getX();
-			float yDistance = h.getY() - player.getY();
+			float xDistance = h.x - player.x;
+			float yDistance = h.y - player.y;
 
 			Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
@@ -240,12 +240,12 @@ public class World implements Thinker, Drawable {
 
 		/* Render heroes */
 		for (Hero h : heroes) {
-			h.render();
+			h.draw();
 		}
 
 		/* Render minions */
 		for (Minion m : minions) {
-			m.render();
+			m.draw();
 		}
 
 		renderArmiesLength();
@@ -258,14 +258,14 @@ public class World implements Thinker, Drawable {
 //
 //		for (Hero h : heroes) {
 //
-//			if (!getScreenRectangle().contains((int) h.getX(), (int) h.getY())) {
+//			if (!getScreenRectangle().contains((int) h.x, (int) h.y)) {
 //				/* Calculate arrow place */
 //				float x = ((float) Gdx.graphics.getWidth() / 2) - offsetX;
 //				float y = ((float) Gdx.graphics.getHeight() / 2) - offsetY;
 //				float x1 = 10, y1 = 10, x2 = 100, y2 = 10, x3 = 10, y3 = 100;
 //
-//				float diffX = h.getX() - x;
-//				float diffY = h.getY() - y;
+//				float diffX = h.x - x;
+//				float diffY = h.y - y;
 //
 //				if (diffX > 0) {
 //					if (diffY > 0) {
@@ -462,8 +462,8 @@ public class World implements Thinker, Drawable {
 
 		for (Minion m : neutralMinions) {
 
-			float xDistance = m.getX() - hero.getX();
-			float yDistance = m.getY() - hero.getY();
+			float xDistance = m.x - hero.x;
+			float yDistance = m.y - hero.y;
 
 			Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 

@@ -1,12 +1,8 @@
 package com.caberodev.squarearmy.world;
 
-import com.caberodev.squarearmy.appearance.AppearanceMinionDamaged;
-import com.caberodev.squarearmy.appearance.AppearanceSquare;
-import com.caberodev.squarearmy.appearance.IRenderable;
-import com.caberodev.squarearmy.appearance.IRenderator;
+import com.caberodev.squarearmy.appearance.SquareDrawer;
 import com.caberodev.squarearmy.behavior.BehaviorMinionNoHero;
 import com.caberodev.squarearmy.behavior.IBehavior;
-import com.caberodev.squarearmy.entity.AbstractMoveableEntity;
 import com.caberodev.squarearmy.entity.Color;
 import com.caberodev.squarearmy.health.BasicHealth;
 import com.caberodev.squarearmy.health.IHealth;
@@ -26,7 +22,7 @@ import com.caberodev.squarearmy.health.IHealth;
  * 
  * Appearance and Behavior are the essential ingredients.
  */
-public class Minion extends AbstractMoveableEntity implements IRenderable {
+public class Minion extends WorldObject {
 
 	/* Constants */
 	private static final int         INITIAL_HP = 10;
@@ -38,7 +34,7 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 	private Color color;
 	private IHealth health;
 	private IBehavior behavior;
-	private IRenderator appearance;
+	private SquareDrawer squareDrawer;
 
 	private World world;
 
@@ -52,8 +48,9 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 		/* Default behavior: No Hero */
 		behavior = new BehaviorMinionNoHero(this);
 
-		/* Default appearance: Square Appearance */
-		setAppearance(new AppearanceSquare(this));
+		// Minions have square appearance
+		squareDrawer = new SquareDrawer();
+		squareDrawer.size = 5f; // TODO: Load from WorldObject's DataDict
 	}
 
 	public void damage(int dmg) {
@@ -61,49 +58,25 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 		/* Notify hero minion's dead */
 		if (health.damage(dmg)) {
 			world.addDeadMinion(this);
-		} else if (!appearance.getClass().equals(AppearanceMinionDamaged.class)) {
+		} /*TODO:else if (!appearance.getClass().equals(AppearanceMinionDamaged.class)) {
 			setAppearance(new AppearanceMinionDamaged(this, getAppearance()));
 		}
+		*/
 	}
 
-	public void render() {
-		appearance.render();
+	public void draw() {
+		squareDrawer.x = x;
+		squareDrawer.y = y;
+		squareDrawer.draw();
 	}
 
-	public void update() {
+	public void think(float delta){
+		
+		// Apply movement
+		super.think(delta);
+		
 		/* Behavior */
 		behavior.update();
-
-		/* Apply movement */
-		super.update();
-
-		movementReduction();
-	}
-
-	private void movementReduction() {
-		/* Movement reduction */
-		if (dx > 0) {
-			dx--;
-			if (dx < 1) {
-				dx = 0;
-			}
-		} else if (dx < 0) {
-			dx++;
-			if (dx > -1) {
-				dx = 0;
-			}
-		}
-		if (dy > 0) {
-			dy--;
-			if (dy < 1) {
-				dy = 0;
-			}
-		} else if (dy < 0) {
-			dy++;
-			if (dy > -1) {
-				dy = 0;
-			}
-		}
 	}
 
 	public Object getBehavior() {
@@ -133,13 +106,4 @@ public class Minion extends AbstractMoveableEntity implements IRenderable {
 	public float getSize() {
 		return size;
 	}
-
-	public IRenderator getAppearance() {
-		return appearance;
-	}
-
-	public void setAppearance(IRenderator appearance) {
-		this.appearance = appearance;
-	}
-
 }
