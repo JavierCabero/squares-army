@@ -6,7 +6,7 @@ import com.caberodev.squarearmy.world.WorldObject;
 
 public class HeroController extends Component {
 
-	private float move_speed = 15f;
+	private float move_speed = 0f;
 	
 	public HeroController(WorldObject father) {
 		super("heroController", father);
@@ -15,8 +15,12 @@ public class HeroController extends Component {
 	@Override
 	public void think(float delta) {
 
+		move_speed = father.data._float("movement_speed");
+		
 		father.data.set("dx", InputEngine.dir.x * move_speed);
 		father.data.set("dy", InputEngine.dir.y * move_speed);
+		
+//		System.out.println("Speed (" + father.data._float("dx") + ", " + father.data._float("dy") + ")");
 
 //		System.out.println(father.data.get("x") + " " + father.data.get("y"));
 

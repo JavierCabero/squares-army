@@ -48,8 +48,6 @@ public class World implements Thinker, Drawer {
 
 	public World() {
 
-		LivingFactory.create("player", new DataDictionary());
-
 		// //Create an red
 		// Hero redEnemy = new Hero((Gdx.graphics.getWidth() * 4) / 5,
 		// Gdx.graphics.getHeight() / 2);

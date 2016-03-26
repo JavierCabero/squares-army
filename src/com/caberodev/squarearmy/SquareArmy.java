@@ -33,6 +33,7 @@ public class SquareArmy {
 	private MiddleScreenTexture gameOver;
 	
 	public SquareArmy() {
+		
 		// Start Engines
 		DrawEngine.start();
 		LogicEngine.start();

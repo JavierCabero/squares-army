@@ -21,7 +21,7 @@ public class ListLinker {
 	 * Adds the given WorldObject to its list.
 	 */
 	public static void add(WorldObject o) {
-		String key = o.getClass().getName();
+		String key = o.getClass().getName().toLowerCase();
 		ArrayList<WorldObject> list = linker.get(key);
 		if(list == null) {
 			list = new ArrayList<WorldObject>();

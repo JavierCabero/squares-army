@@ -2,6 +2,9 @@ package com.caberodev.squarearmy;
 
 import java.util.ArrayList;
 
+import com.caberodev.squarearmy.world.Component;
+import com.caberodev.squarearmy.world.WorldObject;
+
 /**
  * 
  * @author Javier Cabero Guerra <br>

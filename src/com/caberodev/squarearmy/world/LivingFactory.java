@@ -24,7 +24,7 @@ public class LivingFactory {
 		case "minion":
 		{ 
 			WorldObject wo = new WorldObject(data);
-			wo.data.set("size", 3);
+			wo.data.set("size", 5);
 			
 			HashMap<String, Component> cmps = new HashMap<String, Component>();
 			
@@ -65,7 +65,7 @@ public class LivingFactory {
 		case "hero":
 		{	
 			WorldObject wo = new WorldObject(data);
-			wo.data.set("size", 5);
+			wo.data.set("size", 8);
 			wo.data.set("color", Color.random());
 			wo.data.set("movement_speed", 4);
 			wo.data.set("call_distance", 35);
@@ -107,9 +107,9 @@ public class LivingFactory {
 		case "player":
 		{	
 			WorldObject wo = new WorldObject(data);
-			wo.data.set("size", 5);
+			wo.data.set("size", 8);
 			wo.data.set("color", Color.random());
-			wo.data.set("movement_speed", 2);
+			wo.data.set("movement_speed", 4);
 			wo.data.set("call_distance", 35);
 			wo.data.set("sight_distance", 300);
 			wo.data.set("close_distance", 50);
