@@ -6,8 +6,8 @@ import static org.lwjgl.opengl.GL11.glColor4f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.Color;
-import com.caberodev.squarearmy.world.WorldObject;
 
 /**
  * 
@@ -15,18 +15,17 @@ import com.caberodev.squarearmy.world.WorldObject;
  * 
  * Holds square geometry data and draws it.
  */
-public class SquareDrawer extends ShapeDrawer {
+public class SquareDrawer extends Drawer {
 
 	public float x, y;
 	public float size  = 1f;
 	public Color color = Color.WHITE;
 
-	public SquareDrawer(WorldObject father) {
-		super("squareDrawer", father);
-	}
-
 	@Override
 	public void think(float delta) {
+		
+		if (father == null) { System.out.println("Well...");  return; }
+		
 		x     = father.data._float("x");
 		y 	  = father.data._float("y");
 		size  = father.data._float("size");

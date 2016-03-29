@@ -1,20 +1,21 @@
 package com.caberodev.squarearmy.util;
 
-import com.caberodev.squarearmy.InputEngine;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
+import com.caberodev.squarearmy.components.Component;
+import com.caberodev.squarearmy.core.InputEngine;
 
 public class HeroController extends Component {
 
 	private float move_speed = 0f;
 	
-	public HeroController(WorldObject father) {
-		super("heroController", father);
+	public HeroController() {
+		super("heroController");
 	}
 
 	@Override
 	public void think(float delta) {
-
+		
+		if (father == null) return;
+		
 		move_speed = father.data._float("movement_speed");
 		
 		father.data.set("dx", InputEngine.dir.x * move_speed);

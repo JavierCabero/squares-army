@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 
+import com.caberodev.squarearmy.core.LivingFactory;
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 import com.caberodev.squarearmy.util.RandomData;

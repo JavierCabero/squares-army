@@ -1,14 +1,14 @@
-package com.caberodev.squarearmy.world;
+package com.caberodev.squarearmy.components;
 
 import java.util.LinkedList;
 
-import com.caberodev.squarearmy.Hearer;
+import com.caberodev.squarearmy.core.Hearer;
 import com.caberodev.squarearmy.util.DataDictionary;
 
 public class Health extends Component {
 
-	public Health(WorldObject father) {
-		super("health", father);
+	public Health() {
+		super("health");
 		data.set("hp", 10);
 	}
 	
@@ -19,7 +19,7 @@ public class Health extends Component {
 			data.set("hp", data._int("hp") - message._int("dp")); // hp: Health Points | dp: Damage Points
 			
 			// If life is negative or 0: die
-			if(data._int("hp") <= 0) { message.set("name", "death"); generateEvent(message); }
+			if(data._int("hp") <= 0) { message.set("name", "die"); generateEvent(message); }
 		}
 	}
 }

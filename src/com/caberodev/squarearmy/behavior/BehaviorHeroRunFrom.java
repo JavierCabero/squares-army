@@ -1,9 +1,8 @@
 package com.caberodev.squarearmy.behavior;
 
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
 /**
  * 
@@ -13,12 +12,11 @@ import com.caberodev.squarearmy.world.WorldObject;
  * 
  * Flee behavior.
  */
-public class BehaviorHeroRunFrom extends Component {
+public class BehaviorHeroRunFrom extends Behavior {
 
 	private WorldObject target;
 
-	public BehaviorHeroRunFrom(WorldObject father, WorldObject target) {
-		super("behaviorHeroRunFrom", father);
+	public BehaviorHeroRunFrom(WorldObject target) {
 		this.target = target;
 	}
 

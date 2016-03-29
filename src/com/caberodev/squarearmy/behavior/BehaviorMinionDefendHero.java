@@ -2,12 +2,11 @@ package com.caberodev.squarearmy.behavior;
 
 import java.util.Random;
 
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
-public class BehaviorMinionDefendHero extends Component {
+public class BehaviorMinionDefendHero extends Behavior {
 
 	/*
 	 * The specific maximum delay this minion will wait (calculated on
@@ -24,8 +23,7 @@ public class BehaviorMinionDefendHero extends Component {
 	private Random r;
 	private int remainingTime = BEHAVIOR_TIME;
 
-	public BehaviorMinionDefendHero(WorldObject father, WorldObject target) {
-		super("behaviorHeroAttackTo", father);
+	public BehaviorMinionDefendHero(WorldObject target) {
 		this.target = target;
 
 		r = new Random();

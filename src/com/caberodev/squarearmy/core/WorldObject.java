@@ -1,12 +1,10 @@
-package com.caberodev.squarearmy.world;
+package com.caberodev.squarearmy.core;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.caberodev.squarearmy.Drawer;
-import com.caberodev.squarearmy.Hearer;
-import com.caberodev.squarearmy.LogicEngine;
-import com.caberodev.squarearmy.Thinker;
+import com.caberodev.squarearmy.components.Component;
+import com.caberodev.squarearmy.components.Health;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 
@@ -138,5 +136,13 @@ public class WorldObject implements Thinker, Hearer {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	/**
+	 * Adds the given component to the WorldObject
+	 */
+	public void addComponent(Component component) {
+		components.put(component.name, component);
+		component.setFather(this);
 	}
 }

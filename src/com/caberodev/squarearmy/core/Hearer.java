@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy;
+package com.caberodev.squarearmy.core;
 
 
 import java.util.LinkedList;

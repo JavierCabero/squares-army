@@ -15,8 +15,11 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import com.caberodev.squarearmy.appearance.MiddleScreenTexture;
-import com.caberodev.squarearmy.util.DataDictionary;
-import com.caberodev.squarearmy.world.LivingFactory;
+import com.caberodev.squarearmy.components.Component;
+import com.caberodev.squarearmy.components.Health;
+import com.caberodev.squarearmy.core.DrawEngine;
+import com.caberodev.squarearmy.core.InputEngine;
+import com.caberodev.squarearmy.core.LogicEngine;
 import com.caberodev.squarearmy.world.World;
 
 /**
@@ -41,8 +44,6 @@ public class SquareArmy {
 
 		// Start game
 		new World();
-		//new MinionGenerator();
-		LivingFactory.create("player", new DataDictionary());
 		
 		glDisable(GL_TEXTURE_2D);
 		
@@ -105,6 +106,8 @@ public class SquareArmy {
 	}
 
 	public static void main(String[] args) {
+		
+		// main loop in constructor
 		new SquareArmy();
 	}
 }

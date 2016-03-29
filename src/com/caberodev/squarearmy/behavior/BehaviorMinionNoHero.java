@@ -3,17 +3,13 @@ package com.caberodev.squarearmy.behavior;
 import java.util.Random;
 
 import com.caberodev.squarearmy.util.DataDictionary;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
 /**
  * 
  * @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- *
  */
-public class BehaviorMinionNoHero extends Component {
+public class BehaviorMinionNoHero extends Behavior {
 
 	private Random r;
 	private int delayUntilNextMove;
@@ -28,14 +24,13 @@ public class BehaviorMinionNoHero extends Component {
 	private static final int MAX_MINION_DELAY = 200;
 	private static final int MAX_MOVEMENT = 10;
 
-	public BehaviorMinionNoHero(WorldObject m) {
-		super("behaviorMinionNoHero", m);
+	public BehaviorMinionNoHero() {
 		
 		/* This behavior colors a neutral minion (gray) */
 		DataDictionary changeColor = new DataDictionary();
 		changeColor.set("name", "drawer");
 		changeColor.set("set:color", "gray");
-		father.hear(null, changeColor);
+//		father.hear(null, changeColor); // ToDo: find a way to change color on father set or similar
 		
 		r = new Random();
 		MAX_DELAY = 200 + r.nextInt(MAX_MINION_DELAY);
@@ -43,6 +38,9 @@ public class BehaviorMinionNoHero extends Component {
 
 	@Override
 	public void think(float delta) {
+		
+		if (father == null) return;
+		
 		/* Waiting a while */
 		if (delayUntilNextMove > 0) {
 			delayUntilNextMove--;

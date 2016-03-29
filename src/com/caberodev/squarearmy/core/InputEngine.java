@@ -1,6 +1,8 @@
-package com.caberodev.squarearmy;
+package com.caberodev.squarearmy.core;
 
 import org.lwjgl.input.Keyboard;
+
+import com.caberodev.squarearmy.Vec2;
 
 /**
  * 

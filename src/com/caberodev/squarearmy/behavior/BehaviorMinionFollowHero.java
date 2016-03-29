@@ -2,12 +2,11 @@ package com.caberodev.squarearmy.behavior;
 
 import java.util.Random;
 
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
-public class BehaviorMinionFollowHero extends Component {
+public class BehaviorMinionFollowHero extends Behavior {
 
 	private Random r;
 	private int delayUntilNextMove;
@@ -23,8 +22,7 @@ public class BehaviorMinionFollowHero extends Component {
 	private static final int MAX_MOVEMENT_DELAY = 25;
 	private static final int MAX_MOVEMENT_DISTANCE = 10;
 
-	public BehaviorMinionFollowHero(WorldObject father, WorldObject target) {
-		super("behaviorMinionFollowHero", father);
+	public BehaviorMinionFollowHero(WorldObject target) {
 		this.target = target;
 
 		// set same color as hero

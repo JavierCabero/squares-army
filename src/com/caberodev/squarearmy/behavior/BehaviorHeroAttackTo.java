@@ -1,21 +1,16 @@
 package com.caberodev.squarearmy.behavior;
 
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
-public class BehaviorHeroAttackTo extends Component {
+public class BehaviorHeroAttackTo extends Behavior {
 
 	private static final int ATTACK_TIME = 100;
 	private int time_remaining = ATTACK_TIME;
 
 	private WorldObject target;
 	
-	public BehaviorHeroAttackTo(WorldObject father) {
-		super("behaviorHeroAttackTo", father);
-	}
-
 	@Override
 	public void think(float delta) {
 		

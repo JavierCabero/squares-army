@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy;
+package com.caberodev.squarearmy.core;
 
 import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
 import static org.lwjgl.opengl.GL11.GL_PROJECTION;
@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+
+import com.caberodev.squarearmy.HeroCamera;
+import com.caberodev.squarearmy.Vec4;
+import com.caberodev.squarearmy.appearance.Drawer;
 
 /**
  * 

@@ -1,9 +1,6 @@
-package com.caberodev.squarearmy;
+package com.caberodev.squarearmy.core;
 
 import java.util.ArrayList;
-
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
 /**
  * 

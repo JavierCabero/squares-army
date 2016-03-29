@@ -1,12 +1,13 @@
-package com.caberodev.squarearmy.world;
+package com.caberodev.squarearmy.components;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import com.caberodev.squarearmy.Hearer;
-import com.caberodev.squarearmy.LogicEngine;
-import com.caberodev.squarearmy.Thinker;
+import com.caberodev.squarearmy.core.Hearer;
+import com.caberodev.squarearmy.core.LogicEngine;
+import com.caberodev.squarearmy.core.Thinker;
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 
 /**
@@ -32,6 +33,10 @@ public abstract class Component implements Thinker, Hearer {
 		
 		LogicEngine.addThinker(this);
 	}
+	
+	public Component(String name) {
+		this(name, null);
+	}
 
 	@Override
 	public void hear(LinkedList<Hearer> sources, DataDictionary message) {
@@ -53,5 +58,18 @@ public abstract class Component implements Thinker, Hearer {
 
 	public void close() {
 		LogicEngine.delThinker(this);
+	}
+	
+	public void setFather(WorldObject father) {
+		this.father = father;
+	}
+	
+	public WorldObject getFather() {
+		return father;
+	}
+
+	// ToDo: implement responses
+	public void addResponse(String key, ArrayList<DataDictionary> rs) {
+		this.responses.put(key, rs);
 	}
 }

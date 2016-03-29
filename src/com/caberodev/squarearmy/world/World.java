@@ -1,15 +1,10 @@
 package com.caberodev.squarearmy.world;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.lwjgl.opengl.Display;
 
-import com.caberodev.squarearmy.Drawer;
-import com.caberodev.squarearmy.Thinker;
-import com.caberodev.squarearmy.behavior.BehaviorMinionFollowHero;
+import com.caberodev.squarearmy.core.LivingFactory;
+import com.caberodev.squarearmy.core.Thinker;
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
@@ -19,8 +14,6 @@ import com.caberodev.squarearmy.util.RandomData;
  * 
  * @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- *        
  *        
  * World<br>
  * 
@@ -29,7 +22,7 @@ import com.caberodev.squarearmy.util.RandomData;
  * 
  * The information about minions and heroes is stored here.
  */
-public class World implements Thinker, Drawer {
+public class World implements Thinker {
 
 	// Constants
 	public static final float CUT_DISTANCE   = 768f; /* To cut some calculus */
@@ -48,6 +41,9 @@ public class World implements Thinker, Drawer {
 
 	public World() {
 
+		new MinionGenerator();
+		LivingFactory.create("player", new DataDictionary());
+				
 		// //Create an red
 		// Hero redEnemy = new Hero((Gdx.graphics.getWidth() * 4) / 5,
 		// Gdx.graphics.getHeight() / 2);
@@ -152,6 +148,7 @@ public class World implements Thinker, Drawer {
 	}
 */
 	public void draw() {
+		// ToDo: Add drawable element to the world
 //		renderArmiesLength();
 //		renderHeroesHealth();
 //		renderEnemyLocatorArrow();

@@ -1,9 +1,8 @@
 package com.caberodev.squarearmy.behavior;
 
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.Component;
-import com.caberodev.squarearmy.world.WorldObject;
 
 /** 
  * 
@@ -12,11 +11,7 @@ import com.caberodev.squarearmy.world.WorldObject;
  * Copyright 2015 (c) All Rights Reserved. <br><br>
  * 
  */
-public class BehaviorHeroCollectMinions extends Component {
-
-	public BehaviorHeroCollectMinions(WorldObject father) {
-		super("behaviorHeroCollectMinions", father);
-	}
+public class BehaviorHeroCollectMinions extends Behavior {
 
 	@Override
 	public void think(float delta) {

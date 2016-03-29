@@ -1,13 +1,11 @@
 package com.caberodev.squarearmy.world;
 
+import com.caberodev.squarearmy.components.Component;
 import com.caberodev.squarearmy.util.DataDictionary;
 
 /**
- * 
- * @author Javier Cabero Guerra <br>
- * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- *
+ * <p>Loads a behavior using its string name.</p>
+ * @author Javier Cabero Guerra 
  */
 public class BehaviorLoader {
 

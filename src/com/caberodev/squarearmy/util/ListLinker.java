@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-import com.caberodev.squarearmy.world.WorldObject;
+import com.caberodev.squarearmy.core.WorldObject;
 
 /**
  * 
@@ -16,32 +16,41 @@ import com.caberodev.squarearmy.world.WorldObject;
 public class ListLinker {
 
 	private static HashMap<String, ArrayList<WorldObject>> linker = new HashMap<String, ArrayList<WorldObject>>();
+	private static HashMap<WorldObject, ArrayList<String>> links  = new HashMap<WorldObject, ArrayList<String>>(); 
 	
 	/**
 	 * Adds the given WorldObject to its list.
 	 */
 	public static void add(WorldObject o) {
-		String key = o.getClass().getName().toLowerCase();
-		ArrayList<WorldObject> list = linker.get(key);
-		if(list == null) {
-			list = new ArrayList<WorldObject>();
-			linker.put(key, list);
-		}
-		list.add(o);
-	}
-	
-	/**
-	 * Adds the Objects in the collection to their list.
-	 */
-	public static void addAll(Collection<? extends WorldObject> c) {
-		for(WorldObject o : c) {
-			String key = o.getClass().getName();
+		Class<?> c = o.getClass();
+		while (!c.equals(Object.class)) {
+			String key = c.getSimpleName();
 			ArrayList<WorldObject> list = linker.get(key);
 			if(list == null) {
 				list = new ArrayList<WorldObject>();
 				linker.put(key, list);
 			}
 			list.add(o);
+			c = c.getSuperclass();
+		}
+	}
+	
+	/**
+	 * Adds the Objects in the collection to their list.
+	 */
+	public static void addAll(Collection<? extends WorldObject> collection) {
+		for(WorldObject o : collection) {
+			Class<?> c = o.getClass();
+			while (!c.equals(Object.class)) {
+				String key = c.getSimpleName();
+				ArrayList<WorldObject> list = linker.get(key);
+				if(list == null) {
+					list = new ArrayList<WorldObject>();
+					linker.put(key, list);
+				}
+				list.add(o);
+				c = c.getSuperclass();
+			}
 		}
 	}
 	
@@ -75,10 +84,10 @@ public class ListLinker {
 	 * Deletes the given WorldObject from its list.
 	 */
 	public static void del(WorldObject o) {
-		String key = o.getClass().getName();
-		ArrayList<WorldObject> list = linker.get(key);
-		if(list != null) 
+		for (String key : links.get(o)) {
+			ArrayList<WorldObject> list = linker.get(key);
 			list.remove(o);
+		}
 	}
 	
 	/**
@@ -86,10 +95,10 @@ public class ListLinker {
 	 */
 	public static void delAll(Collection<? extends WorldObject> c) {
 		for(WorldObject o : c) {
-			String key = o.getClass().getName();
-			ArrayList<WorldObject> list = linker.get(key);
-			if(list != null) 
+			for (String key : links.get(o)) {
+				ArrayList<WorldObject> list = linker.get(key);
 				list.remove(o);
+			}
 		}
 	}
 	
@@ -126,4 +135,5 @@ public class ListLinker {
 	public static int count(String key) {
 		return linker.get(key).size();
 	}
+	
 }

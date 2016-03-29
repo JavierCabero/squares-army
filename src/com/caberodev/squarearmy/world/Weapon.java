@@ -2,7 +2,9 @@ package com.caberodev.squarearmy.world;
 
 import java.util.LinkedList;
 
-import com.caberodev.squarearmy.Hearer;
+import com.caberodev.squarearmy.components.Component;
+import com.caberodev.squarearmy.core.Hearer;
+import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 
@@ -10,13 +12,11 @@ import com.caberodev.squarearmy.util.ListLinker;
  * 
  *  @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- * 
  */
 public class Weapon extends Component {
 
-	public Weapon(WorldObject father) {
-		super("weapon", father);
+	public Weapon() {
+		super("weapon");
 	}
 	
 	@Override
@@ -27,6 +27,8 @@ public class Weapon extends Component {
 	@SuppressWarnings("unchecked")
 	private void damageNearbyUnits() {
 
+		if (father == null) return;
+		
 		// Attack nearby heroes
 		for (WorldObject hero : ListLinker.get("heroes")) {
 			if (!hero.equals(father)) {
