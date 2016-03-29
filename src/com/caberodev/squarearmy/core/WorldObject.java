@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.caberodev.squarearmy.components.Component;
-import com.caberodev.squarearmy.components.Health;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 
