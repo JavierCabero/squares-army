@@ -60,7 +60,7 @@ public abstract class Component implements Thinker, Hearer {
 		LogicEngine.delThinker(this);
 	}
 	
-	public void setFather(WorldObject father) {
+	public void bind(WorldObject father) {
 		
 		if (father == null)
 			throw new ComponentException("Cannot set a null father to the component");

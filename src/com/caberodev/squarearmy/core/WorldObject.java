@@ -142,6 +142,6 @@ public class WorldObject implements Thinker, Hearer {
 	 */
 	public void addComponent(Component component) {
 		components.put(component.name, component);
-		component.setFather(this);
+		component.bind(this);
 	}
 }
