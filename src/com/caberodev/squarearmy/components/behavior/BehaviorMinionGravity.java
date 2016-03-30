@@ -1,3 +1,4 @@
+package com.caberodev.squarearmy.components.behavior;
 //package com.caberodev.squarearmy.behavior;
 //
 //import com.caberodev.squarearmy.world.Hero;

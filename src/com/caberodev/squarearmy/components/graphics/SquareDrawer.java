@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.appearance;
+package com.caberodev.squarearmy.components.graphics;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.glBegin;
@@ -23,8 +23,6 @@ public class SquareDrawer extends Drawer {
 
 	@Override
 	public void think(float delta) {
-		
-		if (father == null) { System.out.println("Well...");  return; }
 		
 		x     = father.data._float("x");
 		y 	  = father.data._float("y");

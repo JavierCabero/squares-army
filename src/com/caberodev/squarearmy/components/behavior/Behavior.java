@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.behavior;
+package com.caberodev.squarearmy.components.behavior;
 
 import com.caberodev.squarearmy.components.Component;
 

@@ -3,16 +3,16 @@ package com.caberodev.squarearmy.core;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.caberodev.squarearmy.appearance.SquareDrawer;
-import com.caberodev.squarearmy.behavior.BehaviorHeroCollectMinions;
-import com.caberodev.squarearmy.behavior.BehaviorMinionNoHero;
 import com.caberodev.squarearmy.components.Component;
-import com.caberodev.squarearmy.components.Health;
+import com.caberodev.squarearmy.components.behavior.BehaviorHeroCollectMinions;
+import com.caberodev.squarearmy.components.behavior.BehaviorMinionNoHero;
+import com.caberodev.squarearmy.components.graphics.SquareDrawer;
+import com.caberodev.squarearmy.components.misc.MinionCollector;
+import com.caberodev.squarearmy.components.stats.Health;
 import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.HeroController;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.MinionCollector;
 import com.caberodev.squarearmy.world.Weapon;
 
 /**

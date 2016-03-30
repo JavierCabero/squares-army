@@ -16,7 +16,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 import com.caberodev.squarearmy.appearance.MiddleScreenTexture;
 import com.caberodev.squarearmy.components.Component;
-import com.caberodev.squarearmy.components.Health;
+import com.caberodev.squarearmy.components.stats.Health;
 import com.caberodev.squarearmy.core.DrawEngine;
 import com.caberodev.squarearmy.core.InputEngine;
 import com.caberodev.squarearmy.core.LogicEngine;

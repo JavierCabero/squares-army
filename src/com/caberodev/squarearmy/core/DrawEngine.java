@@ -14,7 +14,7 @@ import org.lwjgl.opengl.DisplayMode;
 
 import com.caberodev.squarearmy.HeroCamera;
 import com.caberodev.squarearmy.Vec4;
-import com.caberodev.squarearmy.appearance.Drawer;
+import com.caberodev.squarearmy.components.graphics.Drawer;
 
 /**
  * 

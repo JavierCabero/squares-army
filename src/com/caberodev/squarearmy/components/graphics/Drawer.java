@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.appearance;
+package com.caberodev.squarearmy.components.graphics;
 
 import com.caberodev.squarearmy.components.Component;
 import com.caberodev.squarearmy.core.DrawEngine;

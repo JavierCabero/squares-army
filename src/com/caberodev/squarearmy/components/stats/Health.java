@@ -1,7 +1,8 @@
-package com.caberodev.squarearmy.components;
+package com.caberodev.squarearmy.components.stats;
 
 import java.util.LinkedList;
 
+import com.caberodev.squarearmy.components.Component;
 import com.caberodev.squarearmy.core.Hearer;
 import com.caberodev.squarearmy.util.DataDictionary;
 

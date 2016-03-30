@@ -1,4 +1,4 @@
-package com.caberodev.squarearmy.world;
+package com.caberodev.squarearmy.components.misc;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

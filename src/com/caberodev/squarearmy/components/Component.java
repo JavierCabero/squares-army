@@ -31,7 +31,7 @@ public abstract class Component implements Thinker, Hearer {
 		this.name   = name;
 		this.father = father;
 		
-		LogicEngine.addThinker(this);
+		
 	}
 	
 	public Component(String name) {
@@ -61,7 +61,12 @@ public abstract class Component implements Thinker, Hearer {
 	}
 	
 	public void setFather(WorldObject father) {
+		
+		if (father == null)
+			throw new ComponentException("Cannot set a null father to the component");
+		
 		this.father = father;
+		LogicEngine.addThinker(this);
 	}
 	
 	public WorldObject getFather() {
