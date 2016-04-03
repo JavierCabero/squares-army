@@ -38,7 +38,6 @@ public class ListLinker {
 			l1.add(o);
 			l2.add(key);
 			c = c.getSuperclass();
-			o.data.setColor("color", Color.CYAN);
 		}
 	}
 	
@@ -98,7 +97,6 @@ public class ListLinker {
 		for (String key : links.get(o)) {
 			ArrayList<WorldObject> list = linker.get(key);
 			list.remove(o);
-			o.data.setColor("color", Color.RED);
 		}
 	}
 	
@@ -110,7 +108,6 @@ public class ListLinker {
 			for (String key : links.get(o)) {
 				ArrayList<WorldObject> list = linker.get(key);
 				list.remove(o);
-				o.data.setColor("color", Color.RED);
 			}
 		}
 	}

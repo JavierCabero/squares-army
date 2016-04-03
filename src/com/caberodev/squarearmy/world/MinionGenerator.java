@@ -49,18 +49,18 @@ public class MinionGenerator extends WorldObject {
 			int i = RandomData.nextInt(data._float("MINIONS_MAX_X_DISTANCE").intValue());
 			int j = RandomData.nextInt(data._float("MINIONS_MAX_Y_DISTANCE").intValue());
 			if (i % 2 == 0) {
-				x = (int) playerX + Display.getWidth() / 2 + i;
+				x = (int) playerX + i;
 				if (j % 2 == 0) {
-					y = (int) playerY + Display.getHeight() / 2 + j;
+					y = (int) playerY + j;
 				} else {
-					y = (int) playerY - Display.getHeight() / 2 - j;
+					y = (int) playerY - j;
 				}
 			} else {
-				x = (int) playerX - Display.getWidth() / 2 - i;
+				x = (int) playerX - i;
 				if (j % 2 == 0) {
-					y = (int) playerY + Display.getHeight() / 2 + j;
+					y = (int) playerY + j;
 				} else {
-					y = (int) playerY - Display.getHeight() / 2 - j;
+					y = (int) playerY - j;
 				}
 			}
 			
