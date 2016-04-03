@@ -8,7 +8,6 @@ import com.caberodev.squarearmy.worldobjects.WorldObject;
 /**
  * 
  * Author: Javier Cabero Guerra <br>
- * Copyright 2015 (c) All Rights Reserved. <br><br>
  * 
  *  Map wrapper with casting methods for convenience.
  *  

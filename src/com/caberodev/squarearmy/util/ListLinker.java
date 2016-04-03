@@ -38,6 +38,7 @@ public class ListLinker {
 			l1.add(o);
 			l2.add(key);
 			c = c.getSuperclass();
+			o.data.setColor("color", Color.CYAN);
 		}
 	}
 	
@@ -97,6 +98,7 @@ public class ListLinker {
 		for (String key : links.get(o)) {
 			ArrayList<WorldObject> list = linker.get(key);
 			list.remove(o);
+			o.data.setColor("color", Color.RED);
 		}
 	}
 	
@@ -108,29 +110,30 @@ public class ListLinker {
 			for (String key : links.get(o)) {
 				ArrayList<WorldObject> list = linker.get(key);
 				list.remove(o);
+				o.data.setColor("color", Color.RED);
 			}
 		}
 	}
-	
-	/**
-	 * Deletes the given WorldObject from key list.
-	 */
-	public static void del(String key, WorldObject o) {
-		ArrayList<WorldObject> list = linker.get(key);
-		if(list != null) 
-			list.remove(o);
-	}
-	
-	/**
-	 * Deletes the Objects in the collection from key list.
-	 */
-	public static void delAll(String key, Collection<? extends WorldObject> c) {
-		for(WorldObject o : c) {
-			ArrayList<WorldObject> list = linker.get(key);
-			if(list != null) 
-				list.remove(o);
-		}
-	}
+//	
+//	/**
+//	 * Deletes the given WorldObject from key list.
+//	 */
+//	public static void del(String key, WorldObject o) {
+//		ArrayList<WorldObject> list = linker.get(key);
+//		if(list != null) 
+//			list.remove(o);
+//	}
+//	
+//	/**
+//	 * Deletes the Objects in the collection from key list.
+//	 */
+//	public static void delAll(String key, Collection<? extends WorldObject> c) {
+//		for(WorldObject o : c) {
+//			ArrayList<WorldObject> list = linker.get(key);
+//			if(list != null) 
+//				list.remove(o);
+//		}
+//	}
 	
 	/**
 	 * Returns the Objects list associated with the given key. If such association doesn't exists returns null. 
@@ -147,7 +150,7 @@ public class ListLinker {
 	 * Returns the number of objects in the given list or throws an NullPointerException if the list doesn't exist 
 	 */
 	public static int count(String key) {
-		return linker.get(key).size();
+		return linker.get(key) != null ? linker.get(key).size() : 0;
 	}
 	
 }
