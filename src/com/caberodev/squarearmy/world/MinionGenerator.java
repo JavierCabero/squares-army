@@ -1,14 +1,12 @@
 package com.caberodev.squarearmy.world;
 
-import java.util.ArrayList;
-
 import org.lwjgl.opengl.Display;
 
-import com.caberodev.squarearmy.core.LivingFactory;
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 import com.caberodev.squarearmy.util.RandomData;
+import com.caberodev.squarearmy.worldobjects.Minion;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 /**
  * 
@@ -19,24 +17,24 @@ import com.caberodev.squarearmy.util.RandomData;
  */
 public class MinionGenerator extends WorldObject {
 
-	private ArrayList<WorldObject> minions = (ArrayList<WorldObject>) ListLinker.get("minions");
+//	private ArrayList<WorldObject> minions = (ArrayList<WorldObject>) ListLinker.get("Minion");
 	
 	public MinionGenerator() {
-		data.set("MINIONS_MAX_COUNT", 350);
-		data.set("MINIONS_START_COUNT", 50);
-		data.set("MINIONS_MAX_X_DISTANCE", Display.getWidth());
-		data.set("MINIONS_MAX_Y_DISTANCE", Display.getHeight());
+		data.setFloat("MINIONS_MAX_COUNT",  350f);
+		data.setFloat("MINIONS_START_COUNT", 50f);
+		data.setFloat("MINIONS_MAX_X_DISTANCE", (float) Display.getWidth());
+		data.setFloat("MINIONS_MAX_Y_DISTANCE", (float) Display.getHeight());
 		
 		// Create Minions 
-		for (int i = 1; i < data._int("MINIONS_START_COUNT"); i++) {
+		for (int i = 1; i < data._float("MINIONS_START_COUNT"); i++) {
 			
 			DataDictionary minion_data = new DataDictionary();
 
-			minion_data.set("x", RandomData.nextInt(data._int("MINIONS_MAX_X_DISTANCE")));
-			minion_data.set("y", RandomData.nextInt(data._int("MINIONS_MAX_Y_DISTANCE")));
-			minion_data.set("behavior", "idle");
+			minion_data.setFloat("x", (float) RandomData.nextInt(data._float("MINIONS_MAX_X_DISTANCE").intValue())-Display.getWidth()/2);
+			minion_data.setFloat("y", (float) RandomData.nextInt(data._float("MINIONS_MAX_Y_DISTANCE").intValue())-Display.getHeight()/2);
+			minion_data.setString("behavior", "idle");
 			
-			LivingFactory.create("minion", minion_data);
+			new Minion(minion_data);
 		}
 	}
 	
@@ -48,10 +46,10 @@ public class MinionGenerator extends WorldObject {
 		float playerY = DataDictionary.global._float("playerY");
 		
 		// Add minions around player
-		if (ListLinker.count("minions") < data._int("MINIONS_MAX_COUNT")) {
-			int x, y;
-			int i = RandomData.nextInt(data._int("MINIONS_MAX_X_DISTANCE"));
-			int j = RandomData.nextInt(data._int("MINIONS_MAX_Y_DISTANCE"));
+		if (ListLinker.count("Minion") < data._float("MINIONS_MAX_COUNT")) {
+			float x, y;
+			int i = RandomData.nextInt(data._float("MINIONS_MAX_X_DISTANCE").intValue());
+			int j = RandomData.nextInt(data._float("MINIONS_MAX_Y_DISTANCE").intValue());
 			if (i % 2 == 0) {
 				x = (int) playerX + Display.getWidth() / 2 + i;
 				if (j % 2 == 0) {
@@ -69,10 +67,10 @@ public class MinionGenerator extends WorldObject {
 			}
 			
 			DataDictionary data = new DataDictionary();
-			data.set("x", x);
-			data.set("y", y);
+			data.setFloat("x", x);
+			data.setFloat("y", y);
 			
-			LivingFactory.create("minion", data);
+			new Minion(data);
 		}
 	}
 }

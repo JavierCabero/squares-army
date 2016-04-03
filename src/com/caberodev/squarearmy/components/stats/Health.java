@@ -10,17 +10,24 @@ public class Health extends Component {
 
 	public Health() {
 		super("health");
-		data.set("hp", 10);
+		data.setFloat("hp", 10f);
 	}
 	
 	@Override
 	public void hear(LinkedList<Hearer> sources, DataDictionary message) {
-		switch(message._string("name")) {
-		case "damage":
-			data.set("hp", data._int("hp") - message._int("dp")); // hp: Health Points | dp: Damage Points
+		
+		String name = message._string("name");
+		
+		if (name.equals("damage")) {
+			
+			System.out.println("Damaged " + father.getClass().getSimpleName() + " by " + message._float("damage_points"));
+			
+			data.setFloat("hp", data._float("hp") - message._float("damage_points")); // hp: Health Points | dp: Damage Points
 			
 			// If life is negative or 0: die
-			if(data._int("hp") <= 0) { message.set("name", "die"); generateEvent(message); }
+			if(data._float("hp") <= 0) { message.setString("name", "die"); generateEvent(message); }
+		} else {
+			System.out.println("[Health] Received message \"" + message._string("name") + "\"" + " but no logic was found");
 		}
 	}
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-import com.caberodev.squarearmy.core.WorldObject;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 /**
  * 
@@ -25,12 +25,18 @@ public class ListLinker {
 		Class<?> c = o.getClass();
 		while (!c.equals(Object.class)) {
 			String key = c.getSimpleName();
-			ArrayList<WorldObject> list = linker.get(key);
-			if(list == null) {
-				list = new ArrayList<WorldObject>();
-				linker.put(key, list);
+			ArrayList<WorldObject> l1 = linker.get(key);
+			ArrayList<String>      l2 = links.get(o);
+			if (l1 == null) {
+				l1 = new ArrayList<WorldObject>();
+				linker.put(key, l1);
 			}
-			list.add(o);
+			if (l2 == null) {
+				l2 = new ArrayList<String>();
+				links.put(o, l2);
+			}
+			l1.add(o);
+			l2.add(key);
 			c = c.getSuperclass();
 		}
 	}
@@ -43,42 +49,46 @@ public class ListLinker {
 			Class<?> c = o.getClass();
 			while (!c.equals(Object.class)) {
 				String key = c.getSimpleName();
-				ArrayList<WorldObject> list = linker.get(key);
-				if(list == null) {
-					list = new ArrayList<WorldObject>();
-					linker.put(key, list);
+				ArrayList<WorldObject> l1 = linker.get(key);
+				ArrayList<String>      l2 = links.get(o);
+				if(l1 == null) {
+					l1 = new ArrayList<WorldObject>();
+					linker.put(key, l1);
+					l2 = new ArrayList<String>();
+					links.put(o, l2);
 				}
-				list.add(o);
+				l1.add(o);
+				l2.add(key);
 				c = c.getSuperclass();
 			}
 		}
 	}
 	
-	/**
-	 * Adds the given WorldObject to key list.
-	 */
-	public static void add(String key, WorldObject o) {
-		ArrayList<WorldObject> list = linker.get(key);
-		if(list == null) {
-			list = new ArrayList<WorldObject>();
-			linker.put(key, list);
-		}
-		list.add(o);
-	}
-	
-	/**
-	 * Adds the Objects in the collection to key list.
-	 */
-	public static void addAll(String key, Collection<? extends WorldObject> c) {
-		for(WorldObject o : c) {
-			ArrayList<WorldObject> list = linker.get(key);
-			if(list == null) {
-				list = new ArrayList<WorldObject>();
-				linker.put(key, list);
-			}
-			list.add(o);
-		}
-	}
+//	/**
+//	 * Adds the given WorldObject to key list.
+//	 */
+//	public static void add(String key, WorldObject o) {
+//		ArrayList<WorldObject> list = linker.get(key);
+//		if(list == null) {
+//			list = new ArrayList<WorldObject>();
+//			linker.put(key, list);
+//		}
+//		list.add(o);
+//	}
+//	
+//	/**
+//	 * Adds the Objects in the collection to key list.
+//	 */
+//	public static void addAll(String key, Collection<? extends WorldObject> c) {
+//		for(WorldObject o : c) {
+//			ArrayList<WorldObject> list = linker.get(key);
+//			if(list == null) {
+//				list = new ArrayList<WorldObject>();
+//				linker.put(key, list);
+//			}
+//			list.add(o);
+//		}
+//	}
 	
 	/**
 	 * Deletes the given WorldObject from its list.
@@ -126,7 +136,11 @@ public class ListLinker {
 	 * Returns the Objects list associated with the given key. If such association doesn't exists returns null. 
 	 */
 	public static ArrayList<WorldObject> get(String key) {
-		return linker.get(key);
+		ArrayList<WorldObject> list = linker.get(key);
+		if (list == null)
+			list = new ArrayList<WorldObject>();
+		linker.put(key, list);
+		return list;
 	}
 	
 	/**

@@ -2,6 +2,9 @@ package com.caberodev.squarearmy.util;
 
 import java.util.HashMap;
 
+import com.caberodev.squarearmy.components.Component;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
+
 /**
  * 
  * Author: Javier Cabero Guerra <br>
@@ -17,28 +20,35 @@ public class DataDictionary {
 	
 	private HashMap<String, Object> dictionary = new HashMap<String, Object>();
 	
-	public void set(String name, Object value) {
+	public void setString(String name, String value) {
 		dictionary.put(name, value);
 	}
 	
-	public Object get(String name) {
-		try { return dictionary.get(name); } catch(ClassCastException e) { return null; }
+	public void setFloat(String name, Float value) {
+		dictionary.put(name, value);
 	}
 
-	public Integer _int(String name) {
-		try { if (dictionary.containsKey(name)) { return (int) dictionary.get(name); } else { return 0; } } catch(ClassCastException e) { return 0; }
+	public void setDataDictionary(String name, DataDictionary data) {
+		dictionary.put(name, data);
 	}
-
+	
+	public void setComponent(String name, Component cmp) {
+		dictionary.put(name, cmp);
+	}
+	
+	public void setWorldObject(String name, WorldObject wo) {
+		dictionary.put(name, wo);
+	}
+	
+	public void setColor(String name, Color color) {
+		dictionary.put(name, color);
+	}
+	
 	public Boolean is(String name) {
-		
 		try { if (dictionary.containsKey(name)) { return (boolean) dictionary.get(name); } else { return false; } } catch(ClassCastException e) { return false; }
 	}
 	public Float _float(String name) {
 		try { if (dictionary.containsKey(name)) { return (float) dictionary.get(name); } else { return 0f; } } catch(ClassCastException e) { if (dictionary.get(name) instanceof Integer) { return (float) (int) dictionary.get(name); } return 0f; }
-	}
-
-	public Double _double(String name) {
-		try { if (dictionary.containsKey(name)) { return (double) dictionary.get(name); } else { return 0.0; } } catch(ClassCastException e) { if (dictionary.get(name) instanceof Integer) { return (double) (int) dictionary.get(name); } return 0.0; }
 	}
 
 	public String _string(String name) {

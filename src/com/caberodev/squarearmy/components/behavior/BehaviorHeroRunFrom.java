@@ -1,8 +1,8 @@
 package com.caberodev.squarearmy.components.behavior;
 
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 /**
  * 
@@ -52,8 +52,8 @@ public class BehaviorHeroRunFrom extends Behavior {
 			if (realDistance < father.data._float("attack_distance")) {
 				usedAttack = true;
 				DataDictionary message = new DataDictionary();
-				message.set("name", "damage");
-				message.set("amount", father.data._float("attack_damage"));
+				message.setString("name", "damage");
+				message.setFloat("amount", father.data._float("attack_damage"));
 				hero.hear(null, message);				
 				break;
 			}
@@ -76,8 +76,8 @@ public class BehaviorHeroRunFrom extends Behavior {
 				if (realDistance < father.data._float("attack_distance")) {
 					usedAttack = true;
 					DataDictionary message = new DataDictionary();
-					message.set("name", "damage");
-					message.set("amount", father.data._float("attack_damage"));
+					message.setString("name", "damage");
+					message.setFloat("amount", father.data._float("attack_damage"));
 					enemyMinion.hear(null, message);	
 					break;
 				}
@@ -106,21 +106,21 @@ public class BehaviorHeroRunFrom extends Behavior {
 		// Check proximity of the rest of heroes
 		if (closestHero != null) {
 			if (distance < father.data._float("sight_distance")) {
-				if (closestHero.data._int("minion_count") < father.data._int("minion_count")
-						&& (father.data._int("hp") > father.data._int("max_hp") / 3 || father.data._int("hp") > closestHero.data._int("hp"))) {
+				if (closestHero.data._float("minion_count") < father.data._float("minion_count")
+						&& (father.data._float("hp") > father.data._float("max_hp") / 3 || father.data._float("hp") > closestHero.data._float("hp"))) {
 					// Start attacking 
 					DataDictionary message = new DataDictionary();
-					message.set("name", "setBehavior");
-					message.set("behavior", "behaviorHeroAttackTo");
-					message.set("target", closestHero);
+					message.setString("name", "setBehavior");
+					message.setString("behavior", "behaviorHeroAttackTo");
+					message.setWorldObject("target", closestHero);
 					father.hear(null, message);
 				} else {
 					
 					// Start running away
 					DataDictionary message = new DataDictionary();
-					message.set("name", "setBehavior");
-					message.set("behavior", "behaviorHeroRunFrom");
-					message.set("target", closestHero);
+					message.setString("name", "setBehavior");
+					message.setString("behavior", "behaviorHeroRunFrom");
+					message.setWorldObject("target", closestHero);
 					father.hear(null, message);
 				}
 			}
@@ -134,8 +134,8 @@ public class BehaviorHeroRunFrom extends Behavior {
 		Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 		if (realDistance > father.data._float("sight_distance")) {
 			DataDictionary message = new DataDictionary();
-			message.set("name", "setBehavior");
-			message.set("behavior", "behaviorHeroCollectMinions");
+			message.setString("name", "setBehavior");
+			message.setString("behavior", "behaviorHeroCollectMinions");
 			father.hear(null, message);
 		}
 	}
@@ -151,9 +151,9 @@ public class BehaviorHeroRunFrom extends Behavior {
 			if (realDistance < father.data._float("call_distance")) {
 				// Start attacking 
 				DataDictionary message = new DataDictionary();
-				message.set("name", "setBehavior");
-				message.set("behavior", "behaviorMinionFollowHero");
-				message.set("target", father);
+				message.setString("name", "setBehavior");
+				message.setString("behavior", "behaviorMinionFollowHero");
+				message.setWorldObject("target", father);
 				minion.hear(null, message);
 			}
 		}
@@ -165,14 +165,14 @@ public class BehaviorHeroRunFrom extends Behavior {
 		float yDistance = father.data._float("y") - target.data._float("y");
 
 		if (xDistance > 0) {
-			father.data.set("dx", father.data._float("movement_speed"));
+			father.data.setFloat("dx", father.data._float("movement_speed"));
 		} else {
-			father.data.set("dx",-father.data._float("movement_speed"));
+			father.data.setFloat("dx",-father.data._float("movement_speed"));
 		}
 		if (yDistance > 0) {
-			father.data.set("dy", father.data._float("movement_speed"));
+			father.data.setFloat("dy", father.data._float("movement_speed"));
 		} else {
-			father.data.set("dy",-father.data._float("movement_speed"));
+			father.data.setFloat("dy",-father.data._float("movement_speed"));
 		}
 	}
 }

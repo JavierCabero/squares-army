@@ -2,9 +2,9 @@ package com.caberodev.squarearmy.components.behavior;
 
 import java.util.Random;
 
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 public class BehaviorMinionDefendHero extends Behavior {
 
@@ -61,8 +61,8 @@ public class BehaviorMinionDefendHero extends Behavior {
 			if (yDistance < 0) {
 				newDy *= -1;
 			}
-			father.data.set("dx", newDx);
-			father.data.set("dy", newDy);
+			father.data.setFloat("dx", newDx);
+			father.data.setFloat("dy", newDy);
 
 			/* Random wait */
 			delayUntilNextMove = r.nextInt(TOP_MOVEMENT_DELAY / 4);
@@ -75,9 +75,9 @@ public class BehaviorMinionDefendHero extends Behavior {
 		remainingTime--;
 		if (remainingTime <= 0) {
 			DataDictionary message = new DataDictionary();
-			message.set("name", "setBehavior");
-			message.set("behavior", "behaviorMinionFollowHero");
-			message.set("target", target);
+			message.setString("name", "setBehavior");
+			message.setString("behavior", "behaviorMinionFollowHero");
+			message.setWorldObject("target", target);
 			father.hear(null, message);
 		}
 	}
@@ -100,8 +100,8 @@ public class BehaviorMinionDefendHero extends Behavior {
 			if (realDistance < father.data._float("attack_distance")) {
 				usedAttack = true;
 				DataDictionary message = new DataDictionary();
-				message.set("name", "damage");
-				message.set("amount", father.data._float("attack_damage"));
+				message.setString("name", "damage");
+				message.setFloat("amount", father.data._float("attack_damage"));
 				hero.hear(null, message);				
 				break;
 			}
@@ -124,8 +124,8 @@ public class BehaviorMinionDefendHero extends Behavior {
 				if (realDistance < father.data._float("attack_distance")) {
 					usedAttack = true;
 					DataDictionary message = new DataDictionary();
-					message.set("name", "damage");
-					message.set("amount", father.data._float("attack_damage"));
+					message.setString("name", "damage");
+					message.setFloat("amount", father.data._float("attack_damage"));
 					enemyMinion.hear(null, message);	
 					break;
 				}

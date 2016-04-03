@@ -1,8 +1,8 @@
 package com.caberodev.squarearmy.components.behavior;
 
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 public class BehaviorHeroAttackTo extends Behavior {
 
@@ -30,8 +30,8 @@ public class BehaviorHeroAttackTo extends Behavior {
 		} else {
 			// Start attacking 
 			DataDictionary message = new DataDictionary();
-			message.set("name", "setBehavior");
-			message.set("behavior", "behaviorHeroCollectMinions");
+			message.setString("name", "setBehavior");
+			message.setString("behavior", "behaviorHeroCollectMinions");
 			father.hear(null, message);
 		}
 	}
@@ -57,21 +57,21 @@ public class BehaviorHeroAttackTo extends Behavior {
 		// Check proximity of the rest of heroes
 		if (closestHero != null) {
 			if (distance < father.data._float("sight_distance")) {
-				if (closestHero.data._int("minion_count") < father.data._int("minion_count")
-						&& (father.data._int("hp") > father.data._int("max_hp") / 3 || father.data._int("hp") > closestHero.data._int("hp"))) {
+				if (closestHero.data._float("minion_count") < father.data._float("minion_count")
+						&& (father.data._float("hp") > father.data._float("max_hp") / 3 || father.data._float("hp") > closestHero.data._float("hp"))) {
 					// Start attacking 
 					DataDictionary message = new DataDictionary();
-					message.set("name", "setBehavior");
-					message.set("behavior", "behaviorHeroAttackTo");
-					message.set("target", closestHero);
+					message.setString("name", "setBehavior");
+					message.setString("behavior", "behaviorHeroAttackTo");
+					message.setWorldObject("target", closestHero);
 					father.hear(null, message);
 				} else {
 					
 					// Start running away
 					DataDictionary message = new DataDictionary();
-					message.set("name", "setBehavior");
-					message.set("behavior", "behaviorHeroRunFrom");
-					message.set("target", closestHero);
+					message.setString("name", "setBehavior");
+					message.setString("behavior", "behaviorHeroRunFrom");
+					message.setWorldObject("target", closestHero);
 					father.hear(null, message);
 				}
 			}
@@ -85,8 +85,8 @@ public class BehaviorHeroAttackTo extends Behavior {
 		Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 		if (realDistance > father.data._float("sight_distance")) {
 			DataDictionary message = new DataDictionary();
-			message.set("name", "setBehavior");
-			message.set("behavior", "behaviorHeroCollectMinions");
+			message.setString("name", "setBehavior");
+			message.setString("behavior", "behaviorHeroCollectMinions");
 			father.hear(null, message);
 		}
 	}
@@ -97,14 +97,14 @@ public class BehaviorHeroAttackTo extends Behavior {
 		float yDistance = target.data._float("y") - father.data._float("y");
 
 		if (xDistance > 0) {
-			father.data.set("dx", +father.data._float("movement_speed"));
+			father.data.setFloat("dx", +father.data._float("movement_speed"));
 		} else {
-			father.data.set("dx", -father.data._float("movement_speed"));
+			father.data.setFloat("dx", -father.data._float("movement_speed"));
 		}
 		if (yDistance > 0) {
-			father.data.set("dy", +father.data._float("movement_speed"));
+			father.data.setFloat("dy", +father.data._float("movement_speed"));
 		} else {
-			father.data.set("dy", -father.data._float("movement_speed"));
+			father.data.setFloat("dy", -father.data._float("movement_speed"));
 		}
 	}
 }

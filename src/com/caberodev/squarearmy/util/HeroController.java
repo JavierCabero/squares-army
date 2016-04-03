@@ -18,16 +18,16 @@ public class HeroController extends Component {
 		
 		move_speed = father.data._float("movement_speed");
 		
-		father.data.set("dx", InputEngine.dir.x * move_speed);
-		father.data.set("dy", InputEngine.dir.y * move_speed);
+		father.data.setFloat("dx", InputEngine.dir.x * move_speed);
+		father.data.setFloat("dy", InputEngine.dir.y * move_speed);
 		
 //		System.out.println("Speed (" + father.data._float("dx") + ", " + father.data._float("dy") + ")");
 
 //		System.out.println(father.data.get("x") + " " + father.data.get("y"));
 
 		// Save position in Global Pool
-		DataDictionary.global.set("playerX", father.data._float("x"));
-		DataDictionary.global.set("playerY", father.data._float("y"));
+		DataDictionary.global.setFloat("playerX", father.data._float("x"));
+		DataDictionary.global.setFloat("playerY", father.data._float("y"));
 
 	}
 }

@@ -2,13 +2,13 @@ package com.caberodev.squarearmy.world;
 
 import org.lwjgl.opengl.Display;
 
-import com.caberodev.squarearmy.core.LivingFactory;
 import com.caberodev.squarearmy.core.Thinker;
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 import com.caberodev.squarearmy.util.RandomData;
+import com.caberodev.squarearmy.worldobjects.Player;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 /**
  * 
@@ -42,7 +42,7 @@ public class World implements Thinker {
 	public World() {
 
 		new MinionGenerator();
-		LivingFactory.create("player", new DataDictionary());
+		new Player();
 				
 		// //Create an red
 		// Hero redEnemy = new Hero((Gdx.graphics.getWidth() * 4) / 5,
@@ -106,7 +106,7 @@ public class World implements Thinker {
 
 			if (realDistance > WORLD_SIZE) {
 				DataDictionary message = new DataDictionary();
-				message.set("name", "die");
+				message.setString("name", "die");
 				minion.hear(null, message);
 			}
 		}

@@ -1,13 +1,12 @@
 package com.caberodev.squarearmy.components.misc;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import com.caberodev.squarearmy.components.Component;
 import com.caberodev.squarearmy.core.Hearer;
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 /**
  * 
@@ -18,11 +17,10 @@ import com.caberodev.squarearmy.util.ListLinker;
  */
 public class MinionCollector extends Component {
 
-	private ArrayList<WorldObject> minions;
+//	private ArrayList<WorldObject> minions = new ArrayList<WorldObject>();
 	
 	public MinionCollector() {
 		super("minionCollector");
-		minions = new ArrayList<WorldObject>();
 	}
 	
 	@Override
@@ -30,8 +28,8 @@ public class MinionCollector extends Component {
 		for (WorldObject wo : ListLinker.get("WorldObject")) {
 			if (wo.data._string("class").equals("minion") && wo.data._string("hero") == null) {
 				DataDictionary message = new DataDictionary();
-				message.set("changeBehavior", "behaviorFollowHero");
-				message.set("hero", father);
+				message.setString("changeBehavior", "behaviorFollowHero");
+				message.setWorldObject("hero", father);
 				wo.hear(null, message);
 			}
 		}
@@ -39,6 +37,6 @@ public class MinionCollector extends Component {
 	
 	@Override
 	public void hear(LinkedList<Hearer> sources, DataDictionary message) {
-		
+		// TODO
 	}
 }

@@ -1,9 +1,12 @@
-package com.caberodev.squarearmy.core;
+package com.caberodev.squarearmy.worldobjects;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.caberodev.squarearmy.components.Component;
+import com.caberodev.squarearmy.core.Hearer;
+import com.caberodev.squarearmy.core.LogicEngine;
+import com.caberodev.squarearmy.core.Thinker;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
 
@@ -21,33 +24,24 @@ import com.caberodev.squarearmy.util.ListLinker;
  */
 public class WorldObject implements Thinker, Hearer {
 
-	public DataDictionary data;
+	public DataDictionary data = new DataDictionary();
 	
-	public HashMap<String, Component> components;
+	public HashMap<String, Component> components = new HashMap<String, Component>();
 	
 	private int id_seq = 0;
-	private int id = id_seq++;
+	private int id     = id_seq++;
 	
 	public WorldObject() {
-		
-		// Initialize DataDictionary
-		data = new DataDictionary();
-		
-		// Initialize component structure
-		components = new HashMap<String, Component>();
-		
-		// Create a list with all instances of the child class
-		ListLinker.add(this);
-		LogicEngine.addThinker(this);
+		this(null);
 	}
 	
 	public WorldObject(DataDictionary data) {
 		
-		// Initialize DataDictionary
-		this.data = data;
+		if(data != null)		
+			this.data = data;
 		
-		// Initialize component structure
-		components = new HashMap<String, Component>();
+		// Class is set in the DataDictionary
+		this.data.setString("class", getClass().getSimpleName());
 		
 		// Create a list with all instances of the child class
 		ListLinker.add(this);
@@ -58,7 +52,6 @@ public class WorldObject implements Thinker, Hearer {
 	 * This method NEEDS to be called. It removes the instance from the list of its class. 
 	 */
 	public void close() {
-		
 		// Delete the method
 		ListLinker.del(this);
 		LogicEngine.delThinker(this);
@@ -66,8 +59,8 @@ public class WorldObject implements Thinker, Hearer {
 	
 	@Override
 	public void think(float delta) {
-		data.set("x", data._float("x") + data._float("dx"));
-		data.set("y", data._float("y") + data._float("dy"));
+		data.setFloat("x", data._float("x") + data._float("dx"));
+		data.setFloat("y", data._float("y") + data._float("dy"));
 		
 		movementReduction();
 	}
@@ -100,45 +93,28 @@ public class WorldObject implements Thinker, Hearer {
 			}
 		}
 		
-		data.set("dx", dx);
-		data.set("dy", dy);
+		data.setFloat("dx", dx);
+		data.setFloat("dy", dy);
 	}
 
 	@Override
 	public void hear(LinkedList<Hearer> sources, DataDictionary message) {
-		switch(message._string("name")) {
-		case "death":
+		
+		String name = message._string("name");
+		
+		if (name.equals("die")) {
+			System.out.println("Dying " + getClass().getSimpleName());
 			close();
 			for(Component cmp : components.values()) 
 				cmp.close();
 			components = null;
-		default:
+		} else {
+			// if message not consumed distribute to all components
 			for (Component cmp : components.values())
 				cmp.hear(sources, message);
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		WorldObject other = (WorldObject) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
 
 	/**
 	 * Adds the given component to the WorldObject

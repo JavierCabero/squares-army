@@ -28,8 +28,8 @@ public class BehaviorMinionNoHero extends Behavior {
 		
 		/* This behavior colors a neutral minion (gray) */
 		DataDictionary changeColor = new DataDictionary();
-		changeColor.set("name", "drawer");
-		changeColor.set("set:color", "gray");
+		changeColor.setString("name", "drawer");
+		changeColor.setString("set:color", "gray");
 //		father.hear(null, changeColor); // ToDo: find a way to change color on father set or similar
 		
 		r = new Random();
@@ -46,8 +46,8 @@ public class BehaviorMinionNoHero extends Behavior {
 			delayUntilNextMove--;
 		} else {
 			/* Random move */
-			father.data.set("dx", MAX_MOVEMENT / 2 - r.nextInt(MAX_MOVEMENT));
-			father.data.set("dy", MAX_MOVEMENT / 2 - r.nextInt(MAX_MOVEMENT));
+			father.data.setFloat("dx", MAX_MOVEMENT / 2f - r.nextInt(MAX_MOVEMENT));
+			father.data.setFloat("dy", MAX_MOVEMENT / 2f - r.nextInt(MAX_MOVEMENT));
 
 			/* Random wait */
 			delayUntilNextMove = r.nextInt(MAX_DELAY);

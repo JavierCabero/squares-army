@@ -7,8 +7,8 @@ import java.util.LinkedList;
 import com.caberodev.squarearmy.core.Hearer;
 import com.caberodev.squarearmy.core.LogicEngine;
 import com.caberodev.squarearmy.core.Thinker;
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 /**
  * 
@@ -30,8 +30,6 @@ public abstract class Component implements Thinker, Hearer {
 	public Component(String name, WorldObject father) {
 		this.name   = name;
 		this.father = father;
-		
-		
 	}
 	
 	public Component(String name) {
@@ -50,7 +48,7 @@ public abstract class Component implements Thinker, Hearer {
 
 	protected void generateEvent(DataDictionary event) {
 		switch(event._string("name")) {
-		case "death":
+		case "die":
 			father.hear(null, event);
 			break;
 		}

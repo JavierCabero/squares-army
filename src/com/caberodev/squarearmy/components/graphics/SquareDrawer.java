@@ -6,7 +6,6 @@ import static org.lwjgl.opengl.GL11.glColor4f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.Color;
 
 /**

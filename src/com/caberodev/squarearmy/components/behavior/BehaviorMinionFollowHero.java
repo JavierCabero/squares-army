@@ -2,9 +2,9 @@ package com.caberodev.squarearmy.components.behavior;
 
 import java.util.Random;
 
-import com.caberodev.squarearmy.core.WorldObject;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
+import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 public class BehaviorMinionFollowHero extends Behavior {
 
@@ -26,7 +26,7 @@ public class BehaviorMinionFollowHero extends Behavior {
 		this.target = target;
 
 		// set same color as hero
-		father.data.set("color", target.data.get("color"));
+		father.data.setColor("color", target.data._color("color"));
 
 		r = new Random();
 		TOP_MOVEMENT_DELAY = 35 + r.nextInt(MAX_MOVEMENT_DELAY);
@@ -69,8 +69,8 @@ public class BehaviorMinionFollowHero extends Behavior {
 				if (yDistance < 0) {
 					newDy *= -1;
 				}
-				father.data.set("dx", newDx);
-				father.data.set("dy", newDy);
+				father.data.setFloat("dx", newDx);
+				father.data.setFloat("dy", newDy);
 
 				/* Random wait */
 				delayUntilNextMove = r.nextInt(TOP_MOVEMENT_DELAY);
@@ -97,8 +97,8 @@ public class BehaviorMinionFollowHero extends Behavior {
 			if (realDistance < father.data._float("attack_distance")) {
 				usedAttack = true;
 				DataDictionary message = new DataDictionary();
-				message.set("name", "damage");
-				message.set("amount", father.data._float("attack_damage"));
+				message.setString("name", "damage");
+				message.setFloat("amount", father.data._float("attack_damage"));
 				hero.hear(null, message);				
 				break;
 			}
@@ -121,8 +121,8 @@ public class BehaviorMinionFollowHero extends Behavior {
 				if (realDistance < father.data._float("attack_distance")) {
 					usedAttack = true;
 					DataDictionary message = new DataDictionary();
-					message.set("name", "damage");
-					message.set("amount", father.data._float("attack_damage"));
+					message.setString("name", "damage");
+					message.setFloat("amount", father.data._float("attack_damage"));
 					enemyMinion.hear(null, message);	
 					break;
 				}
