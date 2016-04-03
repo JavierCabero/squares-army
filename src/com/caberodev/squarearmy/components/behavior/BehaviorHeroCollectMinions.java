@@ -8,8 +8,6 @@ import com.caberodev.squarearmy.worldobjects.WorldObject;
  * 
  *  @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- * 
  */
 public class BehaviorHeroCollectMinions extends Behavior {
 

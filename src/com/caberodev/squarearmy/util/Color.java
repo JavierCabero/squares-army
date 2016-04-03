@@ -4,8 +4,6 @@ package com.caberodev.squarearmy.util;
  * 
  * @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved.
- *                                          
  */
 public class Color {
 	

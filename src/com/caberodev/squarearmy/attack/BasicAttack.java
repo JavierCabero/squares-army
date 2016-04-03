@@ -1,4 +1,5 @@
 package com.caberodev.squarearmy.attack;
+
 public class BasicAttack implements IAttack {
 
 	private int attackDamage;

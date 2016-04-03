@@ -20,8 +20,6 @@ import com.caberodev.squarearmy.components.graphics.Drawer;
  * 
  * @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved.
- *                                          
  */
 public class DrawEngine {
 	

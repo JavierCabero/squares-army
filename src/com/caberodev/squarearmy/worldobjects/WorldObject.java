@@ -103,7 +103,6 @@ public class WorldObject implements Thinker, Hearer {
 		String name = message._string("name");
 		
 		if (name.equals("die")) {
-			System.out.println("Dying " + getClass().getSimpleName());
 			close();
 			for(Component cmp : components.values()) 
 				cmp.close();

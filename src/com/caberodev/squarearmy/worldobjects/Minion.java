@@ -8,8 +8,6 @@ import com.caberodev.squarearmy.util.DataDictionary;
 
 public class Minion extends WorldObject {
 
-	private static int count = 0;
-	
 	public Minion() {}
 	
 	public Minion(DataDictionary data) {
@@ -22,7 +20,5 @@ public class Minion extends WorldObject {
 		addComponent(new WeaponStandard());
 		addComponent(new BehaviorMinionNoHero());
 		addComponent(new SquareDrawer());
-		
-		System.err.println("Minion created (" + count++ + ")");
 	}
 }

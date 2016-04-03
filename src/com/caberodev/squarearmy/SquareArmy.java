@@ -5,18 +5,8 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glDisable;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 
-import com.caberodev.squarearmy.appearance.MiddleScreenTexture;
-import com.caberodev.squarearmy.components.Component;
-import com.caberodev.squarearmy.components.stats.Health;
 import com.caberodev.squarearmy.core.DrawEngine;
 import com.caberodev.squarearmy.core.InputEngine;
 import com.caberodev.squarearmy.core.LogicEngine;
@@ -27,14 +17,8 @@ import com.caberodev.squarearmy.world.World;
  */
 public class SquareArmy {
 
-	private final int INITIAL_MINIONS = 50;
 	private boolean running = true;
 
-	/* World */
-	private World world;
-	private int state;
-	private MiddleScreenTexture gameOver;
-	
 	public SquareArmy() {
 		
 		// Start Engines
@@ -47,8 +31,7 @@ public class SquareArmy {
 		
 		glDisable(GL_TEXTURE_2D);
 		
-		state = 1;
-		world = new World();
+		new World();
 		
 		while (running) {
 			// Render
@@ -90,20 +73,16 @@ public class SquareArmy {
 		DrawEngine.draw();
 	}
 
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	private Texture loadTexture(String key) {
-		try {
-			return TextureLoader.getTexture("PNG", new FileInputStream(new File("res/" + key + ".png")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	private Texture loadTexture(String key) {
+//		try {
+//			return TextureLoader.getTexture("PNG", new FileInputStream(new File("res/" + key + ".png")));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
 	public static void main(String[] args) {
 		

@@ -6,7 +6,6 @@ import com.caberodev.squarearmy.components.graphics.SquareDrawer;
 import com.caberodev.squarearmy.components.misc.MinionCollector;
 import com.caberodev.squarearmy.components.stats.Health;
 import com.caberodev.squarearmy.components.weapons.WeaponMinionKiller;
-import com.caberodev.squarearmy.components.weapons.WeaponStandard;
 import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.HeroController;
@@ -28,11 +27,7 @@ public class Player extends WorldObject {
 		health.addResponse("damage", new ArrayList<DataDictionary>());
 		addComponent(health);
 		
-		WeaponMinionKiller weapon = new WeaponMinionKiller();
-//		weapon.data.setFloat("weapon_attack_distance", 50f);
-//		weapon.data.setFloat("weapon_attack_damage", 5);
-		addComponent(weapon);
-		
+		addComponent(new WeaponMinionKiller());
 		addComponent(new SquareDrawer());
 		addComponent(new MinionCollector());
 		addComponent(new HeroController());

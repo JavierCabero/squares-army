@@ -14,9 +14,6 @@ import com.caberodev.squarearmy.worldobjects.WorldObject;
  * 
  * @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- *        
- *        
  * A component can generate events and dynamically response to them sending messages to other components.
  */
 public abstract class Component implements Thinker, Hearer {

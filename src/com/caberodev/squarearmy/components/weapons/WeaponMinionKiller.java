@@ -7,7 +7,6 @@ import org.lwjgl.input.Keyboard;
 import com.caberodev.squarearmy.core.Hearer;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.world.World;
 import com.caberodev.squarearmy.worldobjects.WorldObject;
 
 public class WeaponMinionKiller extends Weapon {
@@ -19,14 +18,14 @@ public class WeaponMinionKiller extends Weapon {
 	
 	@Override
 	public void think(float delta) {
-		System.out.println("Looking for minions (" + ListLinker.count("Minion") + ") from (" + father.data._float("x") + ", " + father.data._float("y") + ")");
+//		System.out.println("Looking for minions (" + ListLinker.count("Minion") + ") from (" + father.data._float("x") + ", " + father.data._float("y") + ")");
 		for (WorldObject minion : ListLinker.get("Minion")) {
 			
 			float xDistance = minion.data._float("x") - father.data._float("x");
 			float yDistance = minion.data._float("y") - father.data._float("y");
 			Double realDistance = Math.sqrt(xDistance * xDistance + yDistance * yDistance);
 
-			System.out.println("   Saw minion at " + realDistance + "m! (" + minion.data._float("x") + ", " + minion.data._float("y") + ")");
+//			System.out.println("   Saw minion at " + realDistance + "m! (" + minion.data._float("x") + ", " + minion.data._float("y") + ")");
 			
 			/* Check distance */
 			if (realDistance < data._float("attack_distance")) {

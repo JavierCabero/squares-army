@@ -8,8 +8,6 @@ import com.caberodev.squarearmy.worldobjects.WorldObject;
  * 
  * @author Javier Cabero Guerra <br>
  * 
- * Copyright 2015 (c) All Rights Reserved. <br><br>
- * 
  * Flee behavior.
  */
 public class BehaviorHeroRunFrom extends Behavior {
