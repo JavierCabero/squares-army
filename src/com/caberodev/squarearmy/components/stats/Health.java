@@ -20,9 +20,7 @@ public class Health extends Component {
 		
 		if (name.equals("damage")) {
 			
-			System.out.println("Damaged " + father.getClass().getSimpleName() + " by " + message._float("damage_points"));
-			
-			data.setFloat("hp", data._float("hp") - message._float("damage_points")); // hp: Health Points | dp: Damage Points
+			data.setFloat("hp", data._float("hp") - message._float("damage_points"));
 			
 			// If life is negative or 0: die
 			if(data._float("hp") <= 0) { message.setString("name", "die"); generateEvent(message); }

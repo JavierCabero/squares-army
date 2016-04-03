@@ -17,7 +17,7 @@ import com.caberodev.squarearmy.util.Color;
 public class SquareDrawer extends Drawer {
 
 	public float x, y;
-	public float size  = 1f;
+	public float size  = 0f;
 	public Color color = Color.WHITE;
 
 	@Override

@@ -34,11 +34,9 @@ public class WeaponMinionKiller extends Weapon {
 				DataDictionary message = new DataDictionary();
 				message.setString("name", "damage");
 				message.setFloat("damage_points", data._float("attack_damage"));
-				System.out.println(realDistance);
 				
 				if(Keyboard.isKeyDown(Keyboard.KEY_O) )
 					minion.hear(sources, message);
-				System.out.println("Damaging");
 				return;
 			}
 		}

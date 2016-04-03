@@ -22,6 +22,5 @@ public abstract class Drawer extends Component {
 	public void close() {
 		super.close();
 		DrawEngine.delDrawer(this);
-		System.out.println("Deleting this");
 	}
 }

@@ -3,10 +3,8 @@ package com.caberodev.squarearmy.world;
 import org.lwjgl.opengl.Display;
 
 import com.caberodev.squarearmy.core.Thinker;
-import com.caberodev.squarearmy.util.Color;
 import com.caberodev.squarearmy.util.DataDictionary;
 import com.caberodev.squarearmy.util.ListLinker;
-import com.caberodev.squarearmy.util.RandomData;
 import com.caberodev.squarearmy.worldobjects.Player;
 import com.caberodev.squarearmy.worldobjects.WorldObject;
 
@@ -27,15 +25,13 @@ public class World implements Thinker {
 	// Constants
 	public static final float CUT_DISTANCE   = 768f; /* To cut some calculus */
 	private static final Double WORLD_SIZE   = (double) (Display.getWidth() * 2);
-	private static final int MAX_NUM_HEROES  = 5;
-	private final int MINIONS_MAX_X_DISTANCE = Display.getWidth();
-	private final int MINIONS_MAX_Y_DISTANCE = Display.getHeight();
-	private final int HEROES_RESPAWN_TIME    = 128;
+//	private static final int MAX_NUM_HEROES  = 5;
+//	private final int HEROES_RESPAWN_TIME    = 128;
 	
-	private int numHeroes = 0;
-	private int nextHeroSpawn = HEROES_RESPAWN_TIME + RandomData.nextInt(HEROES_RESPAWN_TIME);
+//	private int numHeroes = 0;
+//	private int nextHeroSpawn = HEROES_RESPAWN_TIME + RandomData.nextInt(HEROES_RESPAWN_TIME);
 	
-	private Color[] colors = new Color[]{Color.BLUE, Color.RED, Color.CYAN, Color.GRAY, Color.GREEN, Color.WHITE, Color.YELLOW};
+//	private Color[] colors = new Color[]{Color.BLUE, Color.RED, Color.CYAN, Color.GRAY, Color.GREEN, Color.WHITE, Color.YELLOW};
 //	private final Double alpha   = Math.asin(Gdx.graphics.getHeight() / Math.sqrt((Gdx.graphics.getWidth()  * Gdx.graphics.getWidth()) + 
 //			                		       									      (Gdx.graphics.getHeight() * Gdx.graphics.getHeight())));
 

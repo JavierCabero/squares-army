@@ -28,8 +28,8 @@ public class WorldObject implements Thinker, Hearer {
 	
 	public HashMap<String, Component> components = new HashMap<String, Component>();
 	
-	private int id_seq = 0;
-	private int id     = id_seq++;
+//	private int id_seq = 0;
+//	private int id     = id_seq++;
 	
 	public WorldObject() {
 		this(null);
