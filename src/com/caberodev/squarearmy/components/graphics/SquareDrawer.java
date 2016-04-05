@@ -31,7 +31,8 @@ public class SquareDrawer extends Drawer {
 	
 	@Override
 	public void draw() {
-
+//		super.draw(); // TODO
+		
 		glColor4f(color.r, color.g, color.b, 1);
 		glBegin(GL_QUADS);
 			glVertex2f(x, y); 
@@ -41,6 +42,5 @@ public class SquareDrawer extends Drawer {
 		glEnd();
 		
 		//System.out.println("Drawing square to: (" + x + ", " + y + ") Size: " + size + " Color: " + color);
-		
 	}
 }

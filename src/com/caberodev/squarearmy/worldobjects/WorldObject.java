@@ -107,11 +107,12 @@ public class WorldObject implements Thinker, Hearer {
 			for(Component cmp : components.values()) 
 				cmp.close();
 			components = null;
-		} else {
-			// if message not consumed distribute to all components
-			for (Component cmp : components.values())
-				cmp.hear(sources, message);
 		}
+		
+
+		// distribute to all components
+		for (Component cmp : components.values())
+			cmp.hear(sources, message);
 	}
 
 
