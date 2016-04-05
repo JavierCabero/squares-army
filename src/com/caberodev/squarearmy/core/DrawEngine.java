@@ -89,7 +89,7 @@ public class DrawEngine {
 		batch.begin();
 		*/
 		for(Drawer item : drawList) 
-			item.draw();
+			item.execute();
 		/*
 		batch.end();
 		

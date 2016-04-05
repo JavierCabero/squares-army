@@ -1,12 +1,9 @@
 package com.caberodev.squarearmy.components.graphics;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import com.caberodev.squarearmy.components.Component;
 import com.caberodev.squarearmy.core.DrawEngine;
-import com.caberodev.squarearmy.core.Hearer;
-import com.caberodev.squarearmy.util.DataDictionary;
 
 /** 
  * 
@@ -23,11 +20,17 @@ public abstract class Drawer extends Component {
 		DrawEngine.addDrawer(this);
 	}
 
-	public void draw() {
-		// TODO
-//		for(DrawModifier dm : modifiers)
-//			dm.execute();
-	};
+	public void execute() {
+		
+		// modifiers change the drawing variables
+		for(DrawModifier dm : modifiers)
+			dm.execute();
+		
+		// draw with the previous changes
+		draw();
+	}
+	
+	public abstract void draw();
 	
 	@Override
 	public void close() {
